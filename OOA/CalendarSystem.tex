@@ -8,7 +8,7 @@
   
   \begin{document}
   
-  \part*{BDSA \#36 - PART I}
+  \part*{BDSA --> OOAD \linebreak A Calendar system}
   
   \paragraph{Revision history} \mbox{}  
   
@@ -19,13 +19,18 @@
         Description & 
         Author         
         \\ \hline
-        1.0 & 4-09-2012 & 
+        01.00.00 & 04-09-2012 & 
         First draft. The document fulfill the requrements for assignemt A36 - PART I &
         Nicolai Krüger 
         \\ \hline        
-        1.1 & 18-09-2012 & 
+        01.01.00 & 18-09-2012 & 
         Added Revision history table. Started writing in english (future writing must be in english) - translation of the first version is yet to be done. & 
         Nicolai Krüger              
+        \\ \hline
+        01.01.01 & 04-09-2012 &
+        Changed the titel of the document. \linebreak
+        Removed the "use case ends" filed in the Use cases. &
+        Nicolai Krüger
         \\ \hline
     \end{tabular}
 \end{table}
@@ -55,7 +60,6 @@ Samtidig skal programmet fungere på touch- og mobilenheder.
    	\item Brugeren navigere hen til den aftale der ønskes slettet med piletasterne, og trykker på "Delete"
    	\item Systemet sletter aftalen og synkronisere med eventuelle webservere.
    	\item Brugeren får vist hele kalenderen (i forhold til det de fik vist før - dag, uge eller måned)
-   	\item Use case slutter
    	\end{itemize}
    \item Redigere en begivenhed
     \begin{itemize}
@@ -66,7 +70,6 @@ Samtidig skal programmet fungere på touch- og mobilenheder.
    	\item Brugeren redigere de dele af begivenheden som skal redigeres, og gemmer aftalen igen.
    	\item Systemet gemmer aftalen og synkronisere med eventuelle webservere.
    	\item Brugeren får vist hele kalenderen (i forhold til det de fik vist før - dag, uge eller måned) med den pågældende aftale markeret.
-   	\item Use case slutter
    	\end{itemize}
    
    \item Skift visning
@@ -74,7 +77,6 @@ Samtidig skal programmet fungere på touch- og mobilenheder.
    \item Brugeren navigere op til menuen med 4 knapper - "Dag", "Uge", "Måned" og "Indstillinger"
    \item Brugeren markere en af de 3 første knapper og trykker "enter"
    \item Systemet skifter visning af kalenderen i forhold til hvad der er trykket
-   \item Use case slutter
    \end{itemize}
    \item Tilføje kalendere (f.eks. hotmail eller gmail)
    \begin{itemize}
@@ -87,7 +89,6 @@ Samtidig skal programmet fungere på touch- og mobilenheder.
    \item Systemet forsøger at tilfå kalenderen
    \item Systemet henter data fra den nye kalender
    \item Brugeren får vist hele kalenderen (i forhold til det de fik vist før - dag, uge eller måned)
-   \item Use case slutter
    \end{itemize}
    \item Fjern kalender
    \begin{itemize}
@@ -101,7 +102,6 @@ Samtidig skal programmet fungere på touch- og mobilenheder.
    \item Brugeren markere "Bekræft sletning" og trykker "enter"
    \item Systemet fjerne alle relationer til kalenderen
    \item Brugeren får vist hele kalenderen (i forhold til det de fik vist før - dag, uge eller måned)
-   \item Use case slutter
    \end{itemize}
    \item Rediger kalender
    \begin{itemize}
@@ -115,7 +115,6 @@ Samtidig skal programmet fungere på touch- og mobilenheder.
    \item Brugeren ændre de felter som ønskes ændret, markere "gem" knapper og trykker "enter"
    \item Systemet opdatere med de nye informationer
    \item Brugeren får vist hele kalenderen (i forhold til det de fik vist før - dag, uge eller måned)
-   \item Use case slutter
    \end{itemize}
    \end{itemize}
    
@@ -124,18 +123,18 @@ Samtidig skal programmet fungere på touch- og mobilenheder.
 
    
    \begin{figure}[h]
-	\caption{}   
+\caption{}   
    \centering
    \includegraphics[scale=1.5]{WP_000143.jpg}
    \end{figure}
    
    \paragraph{Glossary} \mbox{}
-	\subparagraph{Begivenhed} \mbox{}
-	
-	En begivenhed repræsentere en hver form for opslag i kalenderen. Aftaler, noter, arrangementer, osv. \\
-	Det er kort sagt den eneste ting der kan slås op, og ses i kalenderen.
-	
-	
+\subparagraph{Begivenhed} \mbox{}
+
+En begivenhed repræsentere en hver form for opslag i kalenderen. Aftaler, noter, arrangementer, osv. \\
+Det er kort sagt den eneste ting der kan slås op, og ses i kalenderen.
+
+
    
    \paragraph{Supplementary Requirements (FURPS+)} \mbox{}
    \subparagraph{Functionality} \mbox{}
