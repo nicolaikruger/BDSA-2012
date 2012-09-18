@@ -6,6 +6,7 @@ obj
 TestResults
 
 # LaTex files
+build
 *.acn
 *.acr
 *.alg
@@ -32,6 +33,7 @@ TestResults
 *.out
 *.pdfsync
 *.ps
+*.pdf
 *.snm
 *.synctex.gz
 *.toc
