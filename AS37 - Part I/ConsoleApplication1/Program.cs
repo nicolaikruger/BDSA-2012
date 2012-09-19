@@ -236,8 +236,8 @@ namespace BDSA12
 		/// <summary>
 		/// Converts the givin string, so that a star ("*") will match any alphabetic and/or digit characters.
 		/// </summary>
-		/// <param name="s"></param>
-		/// <returns></returns>
+		/// <param name="s">The string to remove a star ("*") from.</param>
+		/// <returns>The given string, but with the star ("*") converted into regularexpression matching any alphabetic and/or digit characters.</returns>
 		static string removeStars(string s)
 		{
 			Regex reg = new Regex(@"\*");
