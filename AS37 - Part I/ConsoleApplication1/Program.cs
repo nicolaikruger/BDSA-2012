@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace BDSA12
 {
-	class Program
+	public class Program
 	{
 		// Two "standard" regular expressions that are used later in the program
 		private static string urlRegEx = @"(http://|www|http://www)[\.\w\d-_]*\.\w*[^\s]*";
@@ -66,7 +66,7 @@ namespace BDSA12
 		/// The first value in a tuple tells at what index in the given string a match occur.
 		/// The second value tells at what index the same match ends.
 		/// The first tuple will be the first match, the second tuple the second match and so forth.</returns>
-		static List<Tuple<int, int>> getIndexes(string txt, string expression)
+		public static List<Tuple<int, int>> getIndexes(string txt, string expression)
 		{
 			List<Tuple<int, int>> returnList = new List<Tuple<int, int>>();
 
@@ -133,7 +133,7 @@ namespace BDSA12
 		/// <param name="txt">The string to split into stringParts</param>
 		/// <param name="startIndex">The start index of the string within the document</param>
 		/// <returns>The given text splitted into stringPart (URIs, dates and "normal" text)</returns>
-		static List<StringPart> findURL(string txt, int startIndex)
+		public static List<StringPart> findURL(string txt, int startIndex)
 		{
 			int normalStartIndex = 0;
 			List<StringPart> returnList = new List<StringPart>();
@@ -176,7 +176,7 @@ namespace BDSA12
 		/// <param name="txt">The string to split into stringParts</param>
 		/// <param name="startIndex">The start index of the string within the document</param>
 		/// <returns>The given text splitted into stringPart (dates and "normal" text)</returns>
-		static List<StringPart> findDates(string txt, int startIndex)
+		public static List<StringPart> findDates(string txt, int startIndex)
 		{
 			int normalStartIndex = 0;
 			List<StringPart> returnList = new List<StringPart>();
@@ -223,14 +223,15 @@ namespace BDSA12
 		}
 
 		/// <summary>
-		/// Removes any plusses ("+") from the given string and replaces them with a whitespaces
+		/// Removes any plusses ("+") from the given string and replaces them with a whitespaces, 
+		/// and calls the removeStars method with new string.
 		/// </summary>
-		/// <param name="s">The string to remove plusses ("+") from.</param>
-		/// <returns>Returns the given string, but with the plusses ("+") converted into whitespaces</returns>
-		static string removePluses(string s)
+		/// <param name="s">The string to remove plusses ("+") and stars ("*") from.</param>
+		/// <returns>Returns the given string, but with the plusses ("+") converted into whitespaces and starts ("*") converted into regularexpression matching any alphabetic and/or digit characters.</returns>
+		public static string removePluses(string s)
 		{
-			Regex reg = new Regex(@"\s*\+\s*");
-			return removeStars(reg.Replace(s, @"\s"));
+			Regex reg = new Regex(@"\s*\++\s*");
+			return removeStars(reg.Replace(s, " ").Trim());
 		}
 
 		/// <summary>
@@ -238,7 +239,7 @@ namespace BDSA12
 		/// </summary>
 		/// <param name="s">The string to remove a star ("*") from.</param>
 		/// <returns>The given string, but with the star ("*") converted into regularexpression matching any alphabetic and/or digit characters.</returns>
-		static string removeStars(string s)
+		public static string removeStars(string s)
 		{
 			Regex reg = new Regex(@"\*");
 			return @"[^\d\w]" + reg.Replace(s, @"(\d|\w)*") + @"[^\d\w]";

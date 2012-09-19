@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BDSA12
 {
-	struct StringPart
+	public struct StringPart
 	{
 		/// <summary>
 		/// The text this string part consists of
