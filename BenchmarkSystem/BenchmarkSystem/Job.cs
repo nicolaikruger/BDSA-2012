@@ -5,19 +5,21 @@ using System.Text;
 
 namespace BenchmarkSystem
 {
-	enum JobState {	Waiting, Qued, Running, Done, Failed }
+	enum JobState {	Waiting, Queued, Running, Done, Failed, Cancelled }
 
 	class Job
 	{
-		private Func<string, string> f { get; set; }
+		public Func<string, string> process { get; private set; }
 
 		public int NumberOfCPU { get; private set; }
 
 		public int ExpRuntime { get; private set; }
 
-		public JobState State { get; private set; }
+		public JobState State { get; set; }
 
 		public Owner Owner { get; private set; }
+
+		public DateTime timeStamp { get; set; }
 
 		public Job(int CPUNum, int runtime, Owner owner, Func<string, string> p)
 		{
@@ -25,31 +27,17 @@ namespace BenchmarkSystem
 			ExpRuntime = runtime;
 			Owner = owner;
 
-			f = p;
+			process = p;
 
 			State = JobState.Waiting;
 		}
 
-		public string process(string s)
+		static void test()
 		{
-			State = JobState.Running;
-			string returnVal = "";
-
-			try {
-				returnVal = f(s);
-			} catch (Exception e) {
-				State = JobState.Failed;
-				throw e;
-			}
-
-			State = JobState.Done;
-			return returnVal;
+			Job j = new Job(1, 1, new Owner("Anders"), (s) => "Hello mr. " + s);
+			j.State = JobState.Running;
+			j.process("Anders");
+			j.State = JobState.Done;
 		}
-
-		static void printJobName()
-		{
-			new Job(1, 30, new Owner("Anders"), (s) => "Job 1, you gave me: " + s);
-		}
-
 	}
 }
