@@ -1,7 +1,7 @@
  \documentclass{article}
  % 3 næste linjer skal med får at vi kan skrive specialtegn såsom æ, ø og å. 
   \usepackage[T1]{fontenc}
-  \usepackage[UTF8]{inputenc}
+ %% \usepackage[UTF8]{inputenc}
   \usepackage{lmodern}
   \usepackage{graphicx}
 
@@ -32,47 +32,50 @@
         Removed the "use case ends" filed in the Use cases. &
         Nicolai Krüger
         \\ \hline
+        01.02.00 & 23-09-2012 & 
+        Translated everything to english. &
+        Anders J
+        \\ \hline
     \end{tabular}
 \end{table}
   
   \paragraph{Vision} \mbox{} 
   
-  Programmet skal fungere på en sådan måde, at det skal være muligt at anvende uden brug af musen. Det skal kunne anvendes uden bruge af mange genveje og lignede, men derimod via enkelte essentielle knapper. 
-Samtidig skal programmet fungere på touch- og mobilenheder.
+  The program has to work in a way, that it is possible to use and operate without use of a mouse. It should also be able to use without use of many shortcuts, but with a few simple and easy-to-use buttons. 
+  The program also has to work on touch- and mobiledevices. 
   
    \paragraph{Use Cases}
    \begin{itemize}
-   \item Opret begivenhed
+   \item Create event
    	\begin{itemize}
-   	\item En bruger begynder at skrive en titel til deres begivenhed og/eller en dato
-   	\item Systemet viser både en live-search ud fra titel og dato. Desuden viser systemet også også en "ny begivenhed" formular - dato vil her blive udfyldt hvis brugeren skriver en dato.
-   	
-   	\item Brugeren at udfylde formularen så meget som der han/ønsker og vælger opret.
-   	\item Systemet gemmer aftalen og synkronisere med eventuelle webservere.
-   	\item Brugeren får vist den pågældende aftale
-   	\item Brugeren får vist hele kalenderen (i forhold til det de fik vist før - dag, uge eller måned) med den pågældende aftale markeret.
-   	\item Use case slutter
+   	\item A user starts to write a titel and/or a date of an event. 
+   	\item The system then shows a live-search based on the title and/or date. Furthermore the system also shows 'a new event' formular, which the user can use if he or she wants to create a new event.   	
+   	\item The user fills out as much information as he or she wants and chooses 'Create'.
+   	\item The system saves the event and syncronizes with external webservers if any.
+   	\item The user is shown with the created event. 
+   	\item The user is shown the whole calendar (with the same viewing as before creation of the event) and the newly created event highlighted. 
+   	\item Use case ends.
    	\end{itemize}
-   \item Slet begivenhed
+   \item Delete event
    \begin{itemize}
-   	\item En bruger begynder at skrive en titel på begivenheden og/eller en dato
-   	\item Systemet viser både en live-search ud fra titel og dato. Desuden viser systemet også også en "ny begivenhed" formular - dato vil her blive udfyldt hvis brugeren skriver en dato.
-   	\item Brugeren navigere hen til den aftale der ønskes slettet med piletasterne, og trykker på "Delete"
-   	\item Systemet sletter aftalen og synkronisere med eventuelle webservere.
-   	\item Brugeren får vist hele kalenderen (i forhold til det de fik vist før - dag, uge eller måned)
+   	\item  A user starts to write a titel and/or a date of an event. 
+   	\item The system shows a live-search for both title and date. 
+   	\item The user navigates to the event that need deletion using the keyboard-arrows and clicks 'Delete'. 
+   	\item The system deletes the event and syncronizes with external systems if any.
+   	\item The user is shown the whole calendar, with same viewing as before the deletion.
    	\end{itemize}
-   \item Redigere en begivenhed
+   \item Edit an event
     \begin{itemize}
-   	\item En bruger begynder at skrive en titel på begivenheden og/eller en dato
-   	\item Systemet viser både en live-search ud fra titel og dato. Desuden viser systemet også også en "ny begivenhed" formular - dato vil her blive udfyldt hvis brugeren skriver en dato.
-   	\item Brugeren navigere hen til den aftale der ønskes redigeret med piletasterne, og trykker "Enter"
-   	\item Systemet åbner aftalen, med samtlige felter som værende redigerbare.
-   	\item Brugeren redigere de dele af begivenheden som skal redigeres, og gemmer aftalen igen.
-   	\item Systemet gemmer aftalen og synkronisere med eventuelle webservere.
-   	\item Brugeren får vist hele kalenderen (i forhold til det de fik vist før - dag, uge eller måned) med den pågældende aftale markeret.
+   	\item A user starts to write a titel and/or a date of an event.
+   	\item The system shows a live-search for both title and date. 
+   	\item The user navigates over to the event and clicks 'Enter'. 
+   	\item The system opens the event with all fields as editable. 
+   	\item The user edits the fields that he or she wants and clicks 'Save'.
+   	\item The system edits the event and syncronizes with external systems if any.
+   	\item The user is shown the whole calendar, with same viewing as prior to the edit. 
    	\end{itemize}
    
-   \item Skift visning
+   \item Change viewing
    \begin{itemize}
    \item Brugeren navigere op til menuen med 4 knapper - "Dag", "Uge", "Måned" og "Indstillinger"
    \item Brugeren markere en af de 3 første knapper og trykker "enter"
@@ -125,7 +128,7 @@ Samtidig skal programmet fungere på touch- og mobilenheder.
    \begin{figure}[h]
 \caption{}   
    \centering
-   \includegraphics[scale=1.5]{WP_000143.jpg}
+%%   \includegraphics[scale=1.5]{WP_000143.jpg}
    \end{figure}
    
    \paragraph{Glossary} \mbox{}
