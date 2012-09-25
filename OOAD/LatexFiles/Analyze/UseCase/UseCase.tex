@@ -1,0 +1,85 @@
+\subparagraph{Use Cases}
+   \begin{itemize}
+   \item Create event
+   	\begin{itemize}
+   	\item A user starts to write a titel and/or a date of an event. 
+   	\item The system then shows a live-search based on the title and/or date. Furthermore the system also shows 'a new event' formular, which the user can use if he or she wants to create a new event.   	
+   	\item The user fills out as much information as he or she wants and chooses 'Create'.
+   	\item The system saves the event and syncronizes with external webservers if any.
+   	\item The user is shown with the created event. 
+   	\item The user is shown the whole calendar (with the same viewing as before creation of the event) and the newly created event highlighted. 
+   	\end{itemize}
+   \item Delete event
+   \begin{itemize}
+   	\item  A user starts to write a titel and/or a date of an event. 
+   	\item The system shows a live-search for both title and date. 
+   	\item The user navigates to the event that need deletion using the keyboard-arrows and clicks 'Delete'. 
+   	\item The system deletes the event and syncronizes with external systems if any.
+   	\item The user is shown the whole calendar, with same viewing as before the deletion.
+   	\end{itemize}
+   \item Edit an event
+    \begin{itemize}
+   	\item A user starts to write a titel and/or a date of an event.
+   	\item The system shows a live-search for both title and date. 
+   	\item The user navigates over to the event and clicks 'Enter'. 
+   	\item The system opens the event with all fields as editable. 
+   	\item The user edits the fields that he or she wants and clicks 'Save'.
+   	\item The system edits the event and syncronizes with external systems if any.
+   	\item The user is shown the whole calendar, with same viewing as prior to the edit. 
+   	\end{itemize}
+   
+   \item Change viewing
+   \begin{itemize}
+   \item Brugeren navigere op til menuen med 4 knapper - "Dag", "Uge", "Måned" og "Indstillinger"
+   \item Brugeren markere en af de 3 første knapper og trykker "enter"
+   \item Systemet skifter visning af kalenderen i forhold til hvad der er trykket
+   \end{itemize}
+   \item Tilføje kalendere (f.eks. hotmail eller gmail)
+   \begin{itemize}
+   \item Brugeren navigere op til menuen med 4 knapper - "Dag", "Uge", "Måned" og "Indstillinger"
+   \item Brugeren markere den sidste knap og trykker "enter"
+   \item Systemet viser en liste med indstillings muligheder
+   \item Brugeren vælger "Tilføj kalender"
+   \item Systemet viser en formular
+   \item Brugeren indtaster url til den ønskede kalenders ICS-fil, og udfylder resten af formularen og trykker "enter"
+   \item Systemet forsøger at tilfå kalenderen
+   \item Systemet henter data fra den nye kalender
+   \item Brugeren får vist hele kalenderen (i forhold til det de fik vist før - dag, uge eller måned)
+   \end{itemize}
+   \item Fjern kalender
+   \begin{itemize}
+   \item Brugeren navigere op til menuen med 4 knapper - "Dag", "Uge", "Måned" og "Indstillinger"
+   \item Brugeren markere den sidste knap og trykker "enter"
+   \item Systemet viser en liste med indstillings muligheder
+   \item Brugeren vælger "Slet kalender"
+   \item Systemet viser en liste over kalendere som systemet henter data fra
+   \item Brugeren markere den kalender som ønskes slettes og trykker "enter"
+   \item Systemet beder brugeren om at bekræfte sletningen
+   \item Brugeren markere "Bekræft sletning" og trykker "enter"
+   \item Systemet fjerne alle relationer til kalenderen
+   \item Brugeren får vist hele kalenderen (i forhold til det de fik vist før - dag, uge eller måned)
+   \end{itemize}
+   \item Rediger kalender
+   \begin{itemize}
+   \item Brugeren navigere op til menuen med 4 knapper - "Dag", "Uge", "Måned" og "Indstillinger"
+   \item Brugeren markere den sidste knap og trykker "enter"
+   \item Systemet viser en liste med indstillings muligheder
+   \item Brugeren vælger rediger kalender
+   \item Systemet viser en liste over kalendere som systemet henter data fra
+   \item Brugeren markere den kalender som ønskes ændret og trykker "enter"
+   \item Systemet viser en formular med udfyldte felter i forhold til den valgte kalender
+   \item Brugeren ændre de felter som ønskes ændret, markere "gem" knapper og trykker "enter"
+   \item Systemet opdatere med de nye informationer
+   \item Brugeren får vist hele kalenderen (i forhold til det de fik vist før - dag, uge eller måned)
+   \end{itemize}
+   \end{itemize}
+   
+   \newpage 
+   \paragraph{Use Case UML Diagrams} \mbox{}
+
+   
+   \begin{figure}[h]
+\caption{}   
+   \centering
+   \includegraphics[scale=1.75]{LatexFiles/Analyze/UseCase/WP_000143.jpg}
+   \end{figure}

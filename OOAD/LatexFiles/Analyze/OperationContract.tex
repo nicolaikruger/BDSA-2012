@@ -1,0 +1,49 @@
+\subparagraph{Operation contracts} \mbox{} 
+  
+  \begin{table}[ht]
+    \begin{tabular}{|l|l|p{90px}|p{50px}|p{90px}|p{90px}|}
+        \hline
+        ID & Name & Parameters & References & Precondition & Post condition
+        \\ \hline
+        OC-1.0 & saveEvent 
+        &
+			EventID : EventID
+			TimeAndDate : Date 
+			Location : String 
+			Title : String 
+			Description : String 
+			Frecuency : 
+			Length : Integer
+			Alarm : Date 
+			CalendarID : CalenderID
+        &
+        Use cases: Create event, Edit event
+        &
+        A user wants to save an event.
+        &
+        A Event instance ev was created
+		If a event already existed with the given ev.EventID, the old Event instance was deleted, and all associations with the old Event was removed.
+		ev.ID became EventID
+		ev.TimeAndDate became TimeAndDate
+		ev.location became Location       
+		ev.Title became Title
+		ev.Description became Description
+		ev.frequency became Frequency        
+		ev.length became Length
+		ev.alarm became Alarm        
+        ev was associated with the Calendar with the given CalenderID
+        \\ \hline        
+        OC-02 & deleteEvent 
+        &
+        	eventID : EventID
+        &
+        Use cases: Delete event
+        &
+        A user wants to delete a Event.
+        The event has to exist in the system.
+        &
+        A confirmation-box has been showed to the user.
+        If the user said OK to the confirmation-box, the Event with the given EventID has been deleted, and all associations with the old Event was removed.
+        \\ \hline
+    \end{tabular}
+\end{table}
