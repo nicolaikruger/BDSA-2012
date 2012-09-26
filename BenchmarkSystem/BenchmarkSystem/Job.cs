@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BenchmarkSystem
+namespace Jobs
 {
-	enum JobState {	Waiting, Queued, Running, Done, Failed, Cancelled }
+	public enum JobState {	Waiting, Queued, Running, Done, Failed, Cancelled }
 
-	class Job
+	public class Job
 	{
 		public Func<string, string> process { get; private set; }
 
@@ -32,9 +32,26 @@ namespace BenchmarkSystem
 			State = JobState.Waiting;
 		}
 
+		public override bool Equals(object obj)
+		{
+			if (obj == null || GetType() != obj.GetType())
+				return false;
+
+			Job j = (Job)obj;
+
+			return (NumberOfCPU == j.NumberOfCPU &&
+					ExpRuntime == j.ExpRuntime &&
+					Owner.Equals(j.Owner)) ? true : false;
+		}
+
+		public override int GetHashCode()
+		{
+			return NumberOfCPU ^ ExpRuntime ^ Owner.GetHashCode();
+		}
+
 		static void test()
 		{
-			Job j = new Job(1, 1, new Owner("Anders"), (s) => "Hello mr. " + s);
+			Job j = new Job(1, 1, new Owner("Anders"), s => "Hello mr. " + s);
 			j.State = JobState.Running;
 			j.process("Anders");
 			j.State = JobState.Done;

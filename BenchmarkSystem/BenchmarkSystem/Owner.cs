@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BenchmarkSystem
+namespace Jobs
 {
-	struct Owner
+	public struct Owner
 	{
 		public readonly string name;
 
