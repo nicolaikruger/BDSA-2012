@@ -15,6 +15,9 @@ namespace BenchmarkSystem
 		private HashSet<Job> longRunningJobs		= new HashSet<Job>();
 		private HashSet<Job> veryLongRunningJobs	= new HashSet<Job>();
 
+		/// <summary>
+		/// Prints out a nice status message about the system
+		/// </summary>
 		public void status()
 		{
 			int totalQueued = shortJobQueue.Count + longJobQueue.Count + veryLongJobQueue.Count;
@@ -36,6 +39,10 @@ namespace BenchmarkSystem
 			Console.Out.WriteLine("+-----------------------------------------------+\n");
 		}
 
+		/// <summary>
+		/// Removes a job from the scheduler.
+		/// </summary>
+		/// <param name="job">The job to remove</param>
         public void removeJob(Job job)
         {
 			if (job.ExpRuntime <= 1000 * 30)
@@ -46,6 +53,10 @@ namespace BenchmarkSystem
 				removeJob(job, veryLongRunningJobs, veryLongJobQueue);
         }
 
+		/// <summary>
+		/// Adds a job to the scheduler. The job is automaticly placed in the right queue.
+		/// </summary>
+		/// <param name="job">The job to add</param>
         public void addJob(Job job)
         {
             if(job.ExpRuntime <= 1000*30)
@@ -56,6 +67,10 @@ namespace BenchmarkSystem
                 veryLongJobQueue.AddLast(job);
         }
 
+		/// <summary>
+		/// Returns the job that was added to the scheduler last.
+		/// </summary>
+		/// <returns>The job that was added last</returns>
 		public Job PopJob()
 		{
 			List<Job> jobs = new List<Job>(3);
@@ -79,6 +94,12 @@ namespace BenchmarkSystem
 				return getFirst(jobs);
 		}
 
+		/// <summary>
+		/// Finds a job within either a hashset or a linkedlist, and removes it.
+		/// </summary>
+		/// <param name="job">The job to remove</param>
+		/// <param name="running">A hashset where the job might be held</param>
+		/// <param name="queue">A linkedlist where the job might be held</param>
 		private void removeJob(Job job, HashSet<Job> running, LinkedList<Job> queue) 
 		{
 			if (running.Remove(job))
@@ -87,6 +108,15 @@ namespace BenchmarkSystem
 			queue.Remove(job);
 		}
 
+		/// <summary>
+		/// Compares a hashset and a linkedlist to find the job that was added first.
+		/// If both collections a empty, null is returned.
+		/// If the hashset is empty, the job is beeing found within the linkedlist.
+		/// If the neither of the collections are empty, the job is beeing found within the hashset.
+		/// </summary>
+		/// <param name="runningCollection">The hashset to look in</param>
+		/// <param name="queue">The linkedlist to look in</param>
+		/// <returns>The job that was first add to the schedular within the two lists</returns>
 		private Job checkFirst(HashSet<Job> runningCollection, LinkedList<Job> queue)
 		{
 			if (runningCollection.Count == 0 && queue.Count == 0)
@@ -97,6 +127,11 @@ namespace BenchmarkSystem
 				return getFirst(runningCollection);
 		}
 
+		/// <summary>
+		/// Finds the job with the earlist timestamp, within a collection
+		/// </summary>
+		/// <param name="jobSet">The collection to look in</param>
+		/// <returns>The job with the earliste timestamp</returns>
 		private Job getFirst(IEnumerable<Job> jobSet)
 		{
 			jobSet.OrderBy(j => j.timeStamp);

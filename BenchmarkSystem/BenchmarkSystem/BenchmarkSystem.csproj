@@ -43,7 +43,6 @@
   <ItemGroup>
     <Compile Include="Job.cs" />
     <Compile Include="Logger.cs" />
-    <Compile Include="LoggerEventArgs.cs" />
     <Compile Include="Owner.cs" />
     <Compile Include="BenchmarkSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

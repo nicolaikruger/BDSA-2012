@@ -43,6 +43,10 @@ namespace BenchmarkSystem
 			Console.ReadLine();
 		}
 
+		/// <summary>
+		/// Submist a job to the system
+		/// </summary>
+		/// <param name="job">The job to add</param>
         public void submit(Job job) 
 		{
 			job.State = JobState.Queued;
@@ -50,6 +54,10 @@ namespace BenchmarkSystem
 			scheduler.addJob(job);
 		}
 
+		/// <summary>
+		/// Cancel a job, and removes it from the system
+		/// </summary>
+		/// <param name="job">The job to remove</param>
         public void cancel(Job job) 
 		{
 			job.State = JobState.Cancelled;
@@ -57,11 +65,17 @@ namespace BenchmarkSystem
 			scheduler.removeJob(job);
 		}
 
+		/// <summary>
+		/// Prints out a nice status message about the system
+		/// </summary>
         public void status() 
 		{
 			scheduler.status();
 		}
 
+		/// <summary>
+		/// NOT IMPLEMENTED YET!
+		/// </summary>
         public void executeAll() { }
 
 

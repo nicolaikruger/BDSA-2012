@@ -48,13 +48,5 @@ namespace Jobs
 		{
 			return NumberOfCPU ^ ExpRuntime ^ Owner.GetHashCode();
 		}
-
-		static void test()
-		{
-			Job j = new Job(1, 1, new Owner("Anders"), s => "Hello mr. " + s);
-			j.State = JobState.Running;
-			j.process("Anders");
-			j.State = JobState.Done;
-		}
 	}
 }
