@@ -5,20 +5,35 @@ using Jobs;
 
 namespace BenchmarkSystem
 {
+#if DEBUG
+	public class Scheduler
+#else
 	internal class Scheduler
+#endif
 	{
-		private LinkedList<Job> shortJobQueue		= new LinkedList<Job>();
-		private LinkedList<Job> longJobQueue		= new LinkedList<Job>();
-		private LinkedList<Job> veryLongJobQueue	= new LinkedList<Job>();
+#if DEBUG
+		public LinkedList<Job> shortJobQueue	= new LinkedList<Job>();
+		public LinkedList<Job> longJobQueue		= new LinkedList<Job>();
+		public LinkedList<Job> veryLongJobQueue	= new LinkedList<Job>();
 
-		private HashSet<Job> shortRunningJobs		= new HashSet<Job>();
-		private HashSet<Job> longRunningJobs		= new HashSet<Job>();
-		private HashSet<Job> veryLongRunningJobs	= new HashSet<Job>();
+		public HashSet<Job> shortRunningJobs	= new HashSet<Job>();
+		public HashSet<Job> longRunningJobs		= new HashSet<Job>();
+		public HashSet<Job> veryLongRunningJobs	= new HashSet<Job>();
+#else
+		private LinkedList<Job> shortJobQueue = new LinkedList<Job>();
+		private LinkedList<Job> longJobQueue = new LinkedList<Job>();
+		private LinkedList<Job> veryLongJobQueue = new LinkedList<Job>();
+
+		private HashSet<Job> shortRunningJobs = new HashSet<Job>();
+		private HashSet<Job> longRunningJobs = new HashSet<Job>();
+		private HashSet<Job> veryLongRunningJobs = new HashSet<Job>();
+#endif
+		internal event EventHandler JobDone, JobRunning;
 
 		/// <summary>
 		/// Prints out a nice status message about the system
 		/// </summary>
-		public void status()
+		internal void status()
 		{
 			int totalQueued = shortJobQueue.Count + longJobQueue.Count + veryLongJobQueue.Count;
 			int totalRunning = shortRunningJobs.Count + longRunningJobs.Count + veryLongRunningJobs.Count;
@@ -40,10 +55,86 @@ namespace BenchmarkSystem
 		}
 
 		/// <summary>
+		/// Execute all of the queued jobs
+		/// </summary>
+#if DEBUG
+		public void executeAll()
+#else
+		internal void executeAll() 
+#endif
+		{
+			bool jobsWaiting = shortJobQueue.Count > 0 || longJobQueue.Count > 0 || veryLongJobQueue.Count > 0;
+			bool freeSpaceForRunningJobs = shortRunningJobs.Count <= 20 || longRunningJobs.Count <= 20 || veryLongRunningJobs.Count <= 20;
+
+			while (jobsWaiting && freeSpaceForRunningJobs)
+			{
+				if (shortJobQueue.Count > 0 && shortRunningJobs.Count <= 20)
+				{
+					Job tmp = shortJobQueue.First();
+					shortJobQueue.RemoveFirst();
+					shortRunningJobs.Add(tmp);
+					tmp.State = JobState.Running;
+					tmp.JobDone += onJobDone;
+					OnJobRunning(tmp, EventArgs.Empty);
+					tmp.procces("");
+				}
+
+				if (longJobQueue.Count > 0 && longRunningJobs.Count <= 20)
+				{
+					Job tmp = longJobQueue.First();
+					longJobQueue.RemoveFirst();
+					longRunningJobs.Add(tmp);
+					tmp.State = JobState.Running;
+					tmp.JobDone += onJobDone;
+					OnJobRunning(tmp, EventArgs.Empty);
+					tmp.procces("");
+				}
+
+				if (veryLongJobQueue.Count > 0 && veryLongRunningJobs.Count <= 20)
+				{
+					Job tmp = veryLongJobQueue.First();
+					veryLongJobQueue.RemoveFirst();
+					veryLongRunningJobs.Add(tmp);
+					tmp.State = JobState.Running;
+					tmp.JobDone += onJobDone;
+					OnJobRunning(tmp, EventArgs.Empty);
+					tmp.procces("");
+				}
+
+				freeSpaceForRunningJobs = shortRunningJobs.Count <= 20 || longRunningJobs.Count <= 20 || veryLongRunningJobs.Count <= 20;
+			}
+		}
+
+		private void OnJobRunning(Job job, EventArgs e)
+		{
+			if (JobRunning != null)
+				JobRunning(job, e);
+		}
+
+		/// <summary>
+		/// Eventhandler for notifying the system that a job has completed.
+		/// Also removes the completed job from the running sets.
+		/// </summary>
+		private void onJobDone(Object o, EventArgs e)
+		{
+			Job job = (Job)o;
+			job.JobDone -= onJobDone;
+			removeJob(job);
+			job.State = JobState.Done;
+
+			if (JobDone != null)
+				JobDone(o, e);
+		}
+
+		/// <summary>
 		/// Removes a job from the scheduler.
 		/// </summary>
 		/// <param name="job">The job to remove</param>
-        public void removeJob(Job job)
+#if DEBUG
+		public void removeJob(Job job)
+#else
+		internal void removeJob(Job job)
+#endif
         {
 			if (job.ExpRuntime <= 1000 * 30)
 				removeJob(job, shortRunningJobs, shortJobQueue);
@@ -57,7 +148,11 @@ namespace BenchmarkSystem
 		/// Adds a job to the scheduler. The job is automaticly placed in the right queue.
 		/// </summary>
 		/// <param name="job">The job to add</param>
-        public void addJob(Job job)
+#if DEBUG
+		public void addJob(Job job)
+#else
+		internal void addJob(Job job)
+#endif
         {
             if(job.ExpRuntime <= 1000*30)
                 shortJobQueue.AddLast(job);
@@ -71,7 +166,11 @@ namespace BenchmarkSystem
 		/// Returns the job that was added to the scheduler last.
 		/// </summary>
 		/// <returns>The job that was added last</returns>
+#if DEBUG
 		public Job PopJob()
+#else	
+		internal Job PopJob()
+#endif
 		{
 			List<Job> jobs = new List<Job>(3);
 

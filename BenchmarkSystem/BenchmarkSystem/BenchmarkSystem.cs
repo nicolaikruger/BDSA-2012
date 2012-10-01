@@ -8,7 +8,11 @@ namespace BenchmarkSystem
 {
 	class BenchmarkSystem
 	{
+#if DEBUG
+		public Scheduler scheduler = new Scheduler();
+#else
         Scheduler scheduler = new Scheduler();
+#endif
 
         public event EventHandler JobSubmitted, JobCancelled, JobRunning, JobTerminated, JobFailed;
 
@@ -50,7 +54,7 @@ namespace BenchmarkSystem
         public void submit(Job job) 
 		{
 			job.State = JobState.Queued;
-			OnJobSubmitted();
+			OnJobSubmitted(job, EventArgs.Empty);
 			scheduler.addJob(job);
 		}
 
@@ -61,7 +65,7 @@ namespace BenchmarkSystem
         public void cancel(Job job) 
 		{
 			job.State = JobState.Cancelled;
-			OnJobCancelled();
+			OnJobCancelled(job, EventArgs.Empty);
 			scheduler.removeJob(job);
 		}
 
@@ -74,43 +78,63 @@ namespace BenchmarkSystem
 		}
 
 		/// <summary>
-		/// NOT IMPLEMENTED YET!
+		/// Execute all of the queued jobs in the scheduler
 		/// </summary>
-        public void executeAll() { }
+        public void executeAll() 
+		{
+			scheduler.executeAll();
+		}
 
 
+		  //////////////////////////////////////////////////
+		 // (Un)subscribes to the event from a scheduler //
+		//////////////////////////////////////////////////
+
+		private void subscribe(Scheduler s)
+		{
+			s.JobRunning += OnJobRunning;
+			s.JobDone += OnJobTerminated;
+		}
+
+		private void unsubscribe(Scheduler s)
+		{
+			s.JobRunning -= OnJobRunning;
+			s.JobDone -= OnJobTerminated;
+		}
+
+
+          ///////////////////////////////////////////////////
+         // The methods below raises the different events //
         ///////////////////////////////////////////////////
-        // The methods below raises the different events //
-        ///////////////////////////////////////////////////
 
-        private void OnJobSubmitted() 
+		private void OnJobSubmitted(Object o, EventArgs e) 
         {
 			if(JobSubmitted != null)
-				JobSubmitted(this, EventArgs.Empty);
+				JobSubmitted(o, e);
         }
 
-        private void OnJobCancelled() 
+		private void OnJobCancelled(Object o, EventArgs e) 
         {
 			if (JobCancelled != null)
-				JobCancelled(this, EventArgs.Empty);
+				JobCancelled(o, e);
         }
 
-        private void OnJobRunning() 
+		private void OnJobRunning(Object o, EventArgs e) 
         {
 			if(JobRunning != null)
-	            JobRunning(this, EventArgs.Empty);
+	            JobRunning(o, e);
         }
 
-        private void OnJobTerminated() 
+		private void OnJobTerminated(Object o, EventArgs e) 
         {
 			if(JobTerminated != null)
-				JobTerminated(this, EventArgs.Empty);
+				JobTerminated(o, e);
         }
 
-        private void OnJobFailed() 
+		private void OnJobFailed(Object o, EventArgs e) 
         {
 			if(JobFailed != null)
-				JobFailed(this, EventArgs.Empty);
+				JobFailed(o, e);
         }
 	}
 }

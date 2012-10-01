@@ -9,7 +9,7 @@ namespace Jobs
 
 	public class Job
 	{
-		public Func<string, string> process { get; private set; }
+		private Func<string, string> p { get; set; }
 
 		public int NumberOfCPU { get; private set; }
 
@@ -21,32 +21,28 @@ namespace Jobs
 
 		public DateTime timeStamp { get; set; }
 
+		public event EventHandler JobDone;
+
 		public Job(int CPUNum, int runtime, Owner owner, Func<string, string> p)
 		{
 			NumberOfCPU = CPUNum;
 			ExpRuntime = runtime;
 			Owner = owner;
 
-			process = p;
+			this.p = p;
 
 			State = JobState.Waiting;
 		}
 
-		public override bool Equals(object obj)
+
+		public string procces(string s)
 		{
-			if (obj == null || GetType() != obj.GetType())
-				return false;
+			string returnMsg = p(s);
 
-			Job j = (Job)obj;
+			if (JobDone != null)
+				JobDone(this, EventArgs.Empty);
 
-			return (NumberOfCPU == j.NumberOfCPU &&
-					ExpRuntime == j.ExpRuntime &&
-					Owner.Equals(j.Owner)) ? true : false;
-		}
-
-		public override int GetHashCode()
-		{
-			return NumberOfCPU ^ ExpRuntime ^ Owner.GetHashCode();
+			return returnMsg;
 		}
 	}
 }
