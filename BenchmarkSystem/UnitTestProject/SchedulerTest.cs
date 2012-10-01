@@ -1,26 +1,59 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Jobs;
+using BenchmarkSystem;
 
 namespace UnitTestProject
 {
 	[TestClass]
 	public class SchedulerTest
 	{
-		/*
-		 * OBS
-		 * Notice that a black-box test has been performed
-		 * to test the scheduler
-		 *  - together with the BenchmarkSystem class.
-		 * This is beeing done, using the status method.
-		 * 
-		 * This is done in this way, not to violate the
-		 * encapsulation of the program.
-		 * 
-		 * The Logger has also been tested using black-box,
-		 * because the Logger at the moment logs to the
-		 * console.
-		 * This is also done in this way, so it won't
-		 * violate the encapsulation of the program.
-		 */
+		[TestMethod]
+		public void addJob_shortJob()
+		{
+			Owner ow = new Owner("Nicolai");
+			Job job = new Job(1, 30000, ow, s => "Hello world");
+			Scheduler sh = new Scheduler();
+
+			sh.addJob(job);
+
+			Assert.IsTrue(sh.shortRunningJobs.Count == 1);
+		}
+
+		[TestMethod]
+		public void addJob_longJob_justOver30K()
+		{
+			Owner ow = new Owner("Nicolai");
+			Job job = new Job(1, 30001, ow, s => "Hello world");
+			Scheduler sh = new Scheduler();
+
+			sh.addJob(job);
+
+			Assert.IsTrue(sh.longRunningJobs.Count == 1);
+		}
+
+		[TestMethod]
+		public void addJob_longJob_120K()
+		{
+			Owner ow = new Owner("Nicolai");
+			Job job = new Job(1, 120000, ow, s => "Hello world");
+			Scheduler sh = new Scheduler();
+
+			sh.addJob(job);
+
+			Assert.IsTrue(sh.longRunningJobs.Count == 1);
+		}
+
+		[TestMethod]
+		public void addJob_veryLongJob_justOver120K()
+		{
+			Owner ow = new Owner("Nicolai");
+			Job job = new Job(1, 120001, ow, s => "Hello world");
+			Scheduler sh = new Scheduler();
+
+			sh.addJob(job);
+
+			Assert.IsTrue(sh.veryLongRunningJobs.Count == 1);
+		}
 	}
 }
