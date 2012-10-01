@@ -6,7 +6,7 @@ using BenchmarkSystem;
 namespace UnitTestProject
 {
 	[TestClass]
-	public class SchedulerTest
+	public class SchedulerTest_addJob
 	{
 		[TestMethod]
 		public void addJob_shortJob()
@@ -17,7 +17,7 @@ namespace UnitTestProject
 
 			sh.addJob(job);
 
-			Assert.IsTrue(sh.shortRunningJobs.Count == 1);
+			Assert.AreEqual(1, sh.shortJobQueue.Count);
 		}
 
 		[TestMethod]
@@ -29,7 +29,7 @@ namespace UnitTestProject
 
 			sh.addJob(job);
 
-			Assert.IsTrue(sh.longRunningJobs.Count == 1);
+			Assert.AreEqual(1, sh.longJobQueue.Count);
 		}
 
 		[TestMethod]
@@ -41,7 +41,7 @@ namespace UnitTestProject
 
 			sh.addJob(job);
 
-			Assert.IsTrue(sh.longRunningJobs.Count == 1);
+			Assert.AreEqual(1, sh.longJobQueue.Count);
 		}
 
 		[TestMethod]
@@ -53,7 +53,7 @@ namespace UnitTestProject
 
 			sh.addJob(job);
 
-			Assert.IsTrue(sh.veryLongRunningJobs.Count == 1);
+			Assert.AreEqual(1, sh.veryLongJobQueue.Count);
 		}
 	}
 }
