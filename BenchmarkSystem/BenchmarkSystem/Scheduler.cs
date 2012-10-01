@@ -64,9 +64,8 @@ namespace BenchmarkSystem
 #endif
 		{
 			bool jobsWaiting = shortJobQueue.Count > 0 || longJobQueue.Count > 0 || veryLongJobQueue.Count > 0;
-			bool freeSpaceForRunningJobs = shortRunningJobs.Count <= 20 || longRunningJobs.Count <= 20 || veryLongRunningJobs.Count <= 20;
 
-			while (jobsWaiting && freeSpaceForRunningJobs)
+			while (jobsWaiting)
 			{
 				if (shortJobQueue.Count > 0 && shortRunningJobs.Count <= 20)
 				{
@@ -77,6 +76,7 @@ namespace BenchmarkSystem
 					tmp.JobDone += onJobDone;
 					OnJobRunning(tmp, EventArgs.Empty);
 					tmp.procces("");
+					Console.Out.WriteLine("\t 1");
 				}
 
 				if (longJobQueue.Count > 0 && longRunningJobs.Count <= 20)
@@ -88,6 +88,7 @@ namespace BenchmarkSystem
 					tmp.JobDone += onJobDone;
 					OnJobRunning(tmp, EventArgs.Empty);
 					tmp.procces("");
+					Console.Out.WriteLine("\t 2");
 				}
 
 				if (veryLongJobQueue.Count > 0 && veryLongRunningJobs.Count <= 20)
@@ -99,9 +100,11 @@ namespace BenchmarkSystem
 					tmp.JobDone += onJobDone;
 					OnJobRunning(tmp, EventArgs.Empty);
 					tmp.procces("");
+					Console.Out.WriteLine("\t 3");
 				}
 
-				freeSpaceForRunningJobs = shortRunningJobs.Count <= 20 || longRunningJobs.Count <= 20 || veryLongRunningJobs.Count <= 20;
+
+				jobsWaiting = shortJobQueue.Count > 0 || longJobQueue.Count > 0 || veryLongJobQueue.Count > 0;
 			}
 		}
 
@@ -154,6 +157,8 @@ namespace BenchmarkSystem
 		internal void addJob(Job job)
 #endif
         {
+			job.timeStamp = DateTime.Now;
+			System.Threading.Thread.Sleep(1);
             if(job.ExpRuntime <= 1000*30)
                 shortJobQueue.AddLast(job);
             else if (job.ExpRuntime <= 1000*60*2)
@@ -163,7 +168,7 @@ namespace BenchmarkSystem
         }
 
 		/// <summary>
-		/// Returns the job that was added to the scheduler last.
+		/// Returns the job that was added to the scheduler first.
 		/// </summary>
 		/// <returns>The job that was added last</returns>
 #if DEBUG
@@ -174,23 +179,28 @@ namespace BenchmarkSystem
 		{
 			List<Job> jobs = new List<Job>(3);
 
-			Job j1 = checkFirst(shortRunningJobs, shortJobQueue);
-			Job j2 = checkFirst(longRunningJobs, longJobQueue);
-			Job j3 = checkFirst(veryLongRunningJobs, veryLongJobQueue);
+			Job j1 = shortJobQueue.First();//checkFirst(shortRunningJobs, shortJobQueue);
+			Job j2 = longJobQueue.First();//checkFirst(longRunningJobs, longJobQueue);
+			Job j3 = veryLongJobQueue.First();//checkFirst(veryLongRunningJobs, veryLongJobQueue);
 
-			if (j1 != null)
-				jobs.Add(j1);
+			jobs.Add(j1);
+			jobs.Add(j2);
+			jobs.Add(j3);
 
-			if (j2 != null)
-				jobs.Add(j2);
+			Job returnJob = getFirst(jobs);
 
-			if (j3 != null)
-				jobs.Add(j3);
+			Console.Out.WriteLine();
+			Console.Out.WriteLine(returnJob.timeStamp);
 
-			if (jobs.Count == 0)
-				return null;
-			else
-				return getFirst(jobs);
+			if (returnJob == j1)
+				shortJobQueue.RemoveFirst();
+			else if (returnJob == j2)
+				longJobQueue.RemoveFirst();
+			else if (returnJob == j3)
+				veryLongJobQueue.RemoveFirst();
+
+			return returnJob;
+
 		}
 
 		/// <summary>
@@ -233,9 +243,9 @@ namespace BenchmarkSystem
 		/// <returns>The job with the earliste timestamp</returns>
 		private Job getFirst(IEnumerable<Job> jobSet)
 		{
-			jobSet.OrderBy(j => j.timeStamp);
+			List<Job> jobs = jobSet.OrderBy(j => j.timeStamp).ToList();
 
-			return jobSet.First();
+			return jobs.First();
 		}
 	}
 }

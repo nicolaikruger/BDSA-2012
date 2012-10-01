@@ -21,28 +21,30 @@ namespace BenchmarkSystem
 			BenchmarkSystem bs = new BenchmarkSystem();
 			Logger.Logger logger = new Logger.Logger(bs);
 
-			bs.status();
-			Owner kruger = new Owner(@"Nicolai Krüger");
-			Owner anders = new Owner("Anders");
-			Owner dario = new Owner("Dario");
-			Job j1 = new Job(2, 10000, kruger, s => "Krugers job kører!");
-			Job j2 = new Job(5, 31000, anders, s => "Anders' job kører!");
-			Job j3 = new Job(10, 7200001, dario, s => "Darios job is running!");
+			Owner ow = new Owner("Nicolai");
+			Scheduler sh = new Scheduler();
 
-			bs.submit(j1);
-			bs.submit(j2);
-			bs.submit(j3);
+			Console.Out.WriteLine("Adding short jobs");
+			for (int i = 0; i < 30; i++)
+			{
+				sh.addJob(new Job(1, 2 + i, ow, s => "Hello world"));
+			}
 
-			bs.status();
+			Console.Out.WriteLine("Adding long jobs");
+			for (int i = 0; i < 30; i++)
+			{
+				sh.addJob(new Job(1, 30001 + i, ow, s => "Hello world"));
+			}
 
-			bs.cancel(j2);
-			bs.cancel(j3);
+			Console.Out.WriteLine("Adding very long jobs");
+			for (int i = 0; i < 30; i++)
+			{
+				sh.addJob(new Job(1, 120001 + i, ow, s => "Hello world"));
+			}
 
-			bs.status();
+			sh.executeAll();
 
-			bs.cancel(j1);
-
-			bs.status();
+			Console.Out.WriteLine("done");
 
 			Console.ReadLine();
 		}
