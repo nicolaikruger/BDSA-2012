@@ -1,0 +1,3 @@
+We no useridenfication, since the Calendar is used on his own computer, were he could be required to login.
+We have no support for multiple users on the same Calendar, so a user must login in at a single Calendar at a time.
+It is not required to be online to use the Calendar, but ofcourse the user will not be able to save his changes to the external Calendar without internet.
