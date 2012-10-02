@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>InspectorBar RBSplitView Layout</key>
+	<string>2 27 772.991</string>
+	<key>Library RBSplitView Layout</key>
+	<string>2 773 -342.503H</string>
+	<key>Main RBSplitView Layout</key>
+	<string>3 212.976 941.056 280</string>
+	<key>Normal Window Layout</key>
+	<string>{{0, 0}, {1436, 878}}</string>
+	<key>Projects RBSplitView Layout</key>
+	<string>2 773 -341.149H</string>
+</dict>
+</plist>
