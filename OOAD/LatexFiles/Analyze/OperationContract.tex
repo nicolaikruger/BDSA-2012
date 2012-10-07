@@ -1,3 +1,41 @@
+\paragraph{Operation contracts} \mbox{}
+	\subparagraph{Id}
+	OC-1.0
+	\subparagraph{Name}
+	saveEvent
+	\subparagraph{Parameters} \mbox{}
+	\begin{itemize}
+	\item EventId : EventId
+	\item CreatedAt : Date
+	\item StartDateAndTime : Date
+	\item EndDateAndTime : Date
+	\item Location : String
+	\item Title : String
+	\item Description : String
+	\item Frequency : 
+	\end{itemize}
+	
+	\subparagraph{Use cases} \mbox{}
+	Create event, Edit event
+	
+	\subparagraph{Preconditions} \mbox{}
+	A user wants to save an event
+	
+	\subparagraph{Postconditions} \mbox{}
+	\begin{itemize}
+	\item A Event instance ev was created
+	\item If a event already existed with the given ev.EventID, the old Event instance was deleted, and all associations with the old Event was removed.
+		\item ev.ID became EventID
+		\item ev.TimeAndDate became TimeAndDate
+		\item ev.location became Location       
+		\item ev.Title became Title
+		\item ev.Description became Description
+		\item ev.frequency became Frequency        
+		\item ev.length became Length
+		\item ev.alarm became Alarm 
+	\end{itemize}
+	
+
 \subparagraph{Operation contracts} \mbox{} 
   
   \begin{table}[ht]
@@ -31,7 +69,7 @@
 		ev.frequency became Frequency        
 		ev.length became Length
 		ev.alarm became Alarm        
-        ev was associated with the Calendar with the given CalenderID
+   
         \\ \hline        
         OC-02 & deleteEvent 
         &
