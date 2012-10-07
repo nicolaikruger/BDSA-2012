@@ -1,14 +1,16 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace Jobs
 {
-	public enum JobState {	Waiting, Queued, Running, Done, Failed, Cancelled }
+
+	public enum JobState { Waiting, Queued, Running, Done, Failed, Cancelled }
 
 	public class Job
 	{
+
 		private Func<string, string> p { get; set; }
 
 		public int NumberOfCPU { get; private set; }

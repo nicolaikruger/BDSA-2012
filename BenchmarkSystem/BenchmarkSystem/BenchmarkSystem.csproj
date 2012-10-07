@@ -32,8 +32,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,12 +48,63 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DB\BenchmarkSystemModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BenchmarkSystemModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\BenchmarkSystemModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BenchmarkSystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\BenchmarkSystemModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BenchmarkSystemModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DB\DatabaseModule.cs" />
+    <Compile Include="DB\DB_Job.cs">
+      <DependentUpon>BenchmarkSystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\DB_JobLog.cs">
+      <DependentUpon>BenchmarkSystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\DB_user.cs">
+      <DependentUpon>BenchmarkSystemModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Job.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Owner.cs" />
     <Compile Include="BenchmarkSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scheduler.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="DB\BenchmarkSystemModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>BenchmarkSystemModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="DB\BenchmarkSystemModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BenchmarkSystemModel.edmx</DependentUpon>
+      <LastGenOutput>BenchmarkSystemModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="DB\BenchmarkSystemModel.edmx.diagram">
+      <DependentUpon>BenchmarkSystemModel.edmx</DependentUpon>
+    </None>
+    <None Include="DB\BenchmarkSystemModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BenchmarkSystemModel.edmx</DependentUpon>
+      <LastGenOutput>BenchmarkSystemModel.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
