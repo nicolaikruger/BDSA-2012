@@ -63,7 +63,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BenchmarkSystemModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="DB\DatabaseModule.cs" />
+    <Compile Include="DB\DatabaseManager.cs" />
     <Compile Include="DB\DB_Job.cs">
       <DependentUpon>BenchmarkSystemModel.tt</DependentUpon>
     </Compile>
@@ -74,6 +74,7 @@
       <DependentUpon>BenchmarkSystemModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Job.cs" />
+    <Compile Include="JobEventArgs.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Owner.cs" />
     <Compile Include="BenchmarkSystem.cs" />
@@ -105,6 +106,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DB\BenchmarkSystemModel.edmx.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

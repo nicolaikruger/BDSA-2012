@@ -4,11 +4,70 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl" Namespace="BenchmarkSystemModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
-        <EntityContainer Name="BenchmarkSystemModelTargetContainer" >
-        </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+    <Schema Namespace="BenchmarkSystemModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="BenchmarkSystemModelStoreContainer">
+    <EntitySet Name="DB_userSet" EntityType="BenchmarkSystemModel.Store.DB_userSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DB_JobSet" EntityType="BenchmarkSystemModel.Store.DB_JobSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DB_JobLogSet" EntityType="BenchmarkSystemModel.Store.DB_JobLogSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="jobuser" Association="BenchmarkSystemModel.Store.jobuser">
+      <End Role="job" EntitySet="DB_JobSet" />
+      <End Role="user" EntitySet="DB_userSet" />
+    </AssociationSet>
+    <AssociationSet Name="jobLogjob" Association="BenchmarkSystemModel.Store.jobLogjob">
+      <End Role="jobLog" EntitySet="DB_JobLogSet" />
+      <End Role="job" EntitySet="DB_JobSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="DB_userSet">
+    <Key>
+      <PropertyRef Name="userId" />
+    </Key>
+    <Property Name="userId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DB_JobSet">
+    <Key>
+      <PropertyRef Name="jobId" />
+    </Key>
+    <Property Name="jobId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="status" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="user_userId" Type="int" Nullable="false" />
+    <Property Name="submitDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DB_JobLogSet">
+    <Key>
+      <PropertyRef Name="logId" />
+    </Key>
+    <Property Name="logId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="status" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="dateTime" Type="datetime" Nullable="false" />
+    <Property Name="job_jobId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="jobuser">
+    <End Role="job" Type="BenchmarkSystemModel.Store.DB_JobSet" Multiplicity="*" />
+    <End Role="user" Type="BenchmarkSystemModel.Store.DB_userSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="job">
+        <PropertyRef Name="user_userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="jobLogjob">
+    <End Role="jobLog" Type="BenchmarkSystemModel.Store.DB_JobLogSet" Multiplicity="*" />
+    <End Role="job" Type="BenchmarkSystemModel.Store.DB_JobSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="job">
+        <PropertyRef Name="jobId" />
+      </Principal>
+      <Dependent Role="jobLog">
+        <PropertyRef Name="job_jobId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="BenchmarkSystemModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" >
@@ -80,13 +139,38 @@
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs" Space="C-S">
-        <Alias Key="Model" Value="BenchmarkSystemModel" />
-        <Alias Key="Target" Value="BenchmarkSystemModel.Store" />
-        <EntityContainerMapping CdmEntityContainer="BenchmarkSystemModelContainer" StorageEntityContainer="BenchmarkSystemModelTargetContainer">
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BenchmarkSystemModelStoreContainer" CdmEntityContainer="BenchmarkSystemModelContainer">
+    <EntitySetMapping Name="DB_userSet">
+      <EntityTypeMapping TypeName="IsTypeOf(BenchmarkSystemModel.DB_user)">
+        <MappingFragment StoreEntitySet="DB_userSet">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DB_JobSet">
+      <EntityTypeMapping TypeName="IsTypeOf(BenchmarkSystemModel.DB_Job)">
+        <MappingFragment StoreEntitySet="DB_JobSet">
+          <ScalarProperty Name="jobId" ColumnName="jobId" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="user_userId" ColumnName="user_userId" />
+          <ScalarProperty Name="submitDate" ColumnName="submitDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DB_JobLogSet">
+      <EntityTypeMapping TypeName="IsTypeOf(BenchmarkSystemModel.DB_JobLog)">
+        <MappingFragment StoreEntitySet="DB_JobLogSet">
+          <ScalarProperty Name="logId" ColumnName="logId" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="dateTime" ColumnName="dateTime" />
+          <ScalarProperty Name="job_jobId" ColumnName="job_jobId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">

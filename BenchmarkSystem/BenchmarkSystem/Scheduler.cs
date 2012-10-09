@@ -28,7 +28,7 @@ namespace BenchmarkSystem
 		private HashSet<Job> longRunningJobs = new HashSet<Job>();
 		private HashSet<Job> veryLongRunningJobs = new HashSet<Job>();
 #endif
-		internal event EventHandler JobDone, JobRunning;
+		internal event EventHandler<JobEventArgs> JobDone, JobRunning;
 
 		/// <summary>
 		/// Prints out a nice status message about the system
@@ -74,9 +74,9 @@ namespace BenchmarkSystem
 					shortRunningJobs.Add(tmp);
 					tmp.State = JobState.Running;
 					tmp.JobDone += onJobDone;
-					OnJobRunning(tmp, EventArgs.Empty);
+					JobEventArgs e = new JobEventArgs(tmp.id, tmp.State);
+					OnJobRunning(tmp, e);
 					tmp.procces("");
-					Console.Out.WriteLine("\t 1");
 				}
 
 				if (longJobQueue.Count > 0 && longRunningJobs.Count <= 20)
@@ -86,9 +86,9 @@ namespace BenchmarkSystem
 					longRunningJobs.Add(tmp);
 					tmp.State = JobState.Running;
 					tmp.JobDone += onJobDone;
-					OnJobRunning(tmp, EventArgs.Empty);
+					JobEventArgs e = new JobEventArgs(tmp.id, tmp.State);
+					OnJobRunning(tmp, e);
 					tmp.procces("");
-					Console.Out.WriteLine("\t 2");
 				}
 
 				if (veryLongJobQueue.Count > 0 && veryLongRunningJobs.Count <= 20)
@@ -98,9 +98,9 @@ namespace BenchmarkSystem
 					veryLongRunningJobs.Add(tmp);
 					tmp.State = JobState.Running;
 					tmp.JobDone += onJobDone;
-					OnJobRunning(tmp, EventArgs.Empty);
+					JobEventArgs e = new JobEventArgs(tmp.id, tmp.State);
+					OnJobRunning(tmp, e);
 					tmp.procces("");
-					Console.Out.WriteLine("\t 3");
 				}
 
 
@@ -108,7 +108,7 @@ namespace BenchmarkSystem
 			}
 		}
 
-		private void OnJobRunning(Job job, EventArgs e)
+		private void OnJobRunning(Job job, JobEventArgs e)
 		{
 			if (JobRunning != null)
 				JobRunning(job, e);
@@ -118,15 +118,16 @@ namespace BenchmarkSystem
 		/// Eventhandler for notifying the system that a job has completed.
 		/// Also removes the completed job from the running sets.
 		/// </summary>
-		private void onJobDone(Object o, EventArgs e)
+		private void onJobDone(Object o, JobEventArgs e)
 		{
 			Job job = (Job)o;
 			job.JobDone -= onJobDone;
 			removeJob(job);
 			job.State = JobState.Done;
+			JobEventArgs newE = new JobEventArgs(job.id, job.State);
 
 			if (JobDone != null)
-				JobDone(o, e);
+				JobDone(o, newE);
 		}
 
 		/// <summary>

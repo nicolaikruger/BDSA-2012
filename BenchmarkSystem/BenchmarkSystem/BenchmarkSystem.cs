@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Jobs;
+using BenchmarkSystem.DB;
 
 namespace BenchmarkSystem
 {
@@ -14,7 +15,7 @@ namespace BenchmarkSystem
         Scheduler scheduler = new Scheduler();
 #endif
 
-        public event EventHandler JobSubmitted, JobCancelled, JobRunning, JobTerminated, JobFailed;
+        public event EventHandler<JobEventArgs> JobSubmitted, JobCancelled, JobRunning, JobTerminated, JobFailed;
 
 		static void Main(string[] args) 
 		{
@@ -22,31 +23,21 @@ namespace BenchmarkSystem
 			Logger.Logger logger = new Logger.Logger(bs);
 
 			Owner ow = new Owner("Nicolai");
-			Scheduler sh = new Scheduler();
 
-			Console.Out.WriteLine("Adding short jobs");
-			for (int i = 0; i < 30; i++)
-			{
-				sh.addJob(new Job(1, 2 + i, ow, s => "Hello world"));
-			}
+			Job j = new Job(1, 2, ow, s => "Hello world");
+			Console.WriteLine("Job: " + j.id);
 
-			Console.Out.WriteLine("Adding long jobs");
-			for (int i = 0; i < 30; i++)
-			{
-				sh.addJob(new Job(1, 30001 + i, ow, s => "Hello world"));
-			}
-
-			Console.Out.WriteLine("Adding very long jobs");
-			for (int i = 0; i < 30; i++)
-			{
-				sh.addJob(new Job(1, 120001 + i, ow, s => "Hello world"));
-			}
-
-			sh.executeAll();
+			bs.submit(j);
+			bs.executeAll();
 
 			Console.Out.WriteLine("done");
 
 			Console.ReadLine();
+		}
+
+		public BenchmarkSystem()
+		{
+			subscribe(scheduler);
 		}
 
 		/// <summary>
@@ -55,8 +46,9 @@ namespace BenchmarkSystem
 		/// <param name="job">The job to add</param>
         public void submit(Job job) 
 		{
+			Console.WriteLine("System -> Jobid = " + job.id);
 			job.State = JobState.Queued;
-			OnJobSubmitted(job, EventArgs.Empty);
+			OnJobSubmitted(job, new JobEventArgs(job.id, job.State));
 			scheduler.addJob(job);
 		}
 
@@ -67,7 +59,7 @@ namespace BenchmarkSystem
         public void cancel(Job job) 
 		{
 			job.State = JobState.Cancelled;
-			OnJobCancelled(job, EventArgs.Empty);
+			OnJobCancelled(job, new JobEventArgs(job.id, job.State));
 			scheduler.removeJob(job);
 		}
 
@@ -109,31 +101,31 @@ namespace BenchmarkSystem
          // The methods below raises the different events //
         ///////////////////////////////////////////////////
 
-		private void OnJobSubmitted(Object o, EventArgs e) 
+		private void OnJobSubmitted(Object o, JobEventArgs e) 
         {
 			if(JobSubmitted != null)
 				JobSubmitted(o, e);
         }
 
-		private void OnJobCancelled(Object o, EventArgs e) 
+		private void OnJobCancelled(Object o, JobEventArgs e) 
         {
 			if (JobCancelled != null)
 				JobCancelled(o, e);
         }
 
-		private void OnJobRunning(Object o, EventArgs e) 
+		private void OnJobRunning(Object o, JobEventArgs e) 
         {
 			if(JobRunning != null)
 	            JobRunning(o, e);
         }
 
-		private void OnJobTerminated(Object o, EventArgs e) 
+		private void OnJobTerminated(Object o, JobEventArgs e) 
         {
 			if(JobTerminated != null)
 				JobTerminated(o, e);
         }
 
-		private void OnJobFailed(Object o, EventArgs e) 
+		private void OnJobFailed(Object o, JobEventArgs e) 
         {
 			if(JobFailed != null)
 				JobFailed(o, e);

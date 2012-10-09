@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using BenchmarkSystem.DB;
 
 namespace Jobs
 {
-
 	public enum JobState { Waiting, Queued, Running, Done, Failed, Cancelled }
 
 	public class Job
@@ -23,10 +23,13 @@ namespace Jobs
 
 		public DateTime timeStamp { get; set; }
 
-		public event EventHandler JobDone;
+		public event EventHandler<JobEventArgs> JobDone;
+
+		public readonly int id;
 
 		public Job(int CPUNum, int runtime, Owner owner, Func<string, string> p)
 		{
+			id = 0;
 			NumberOfCPU = CPUNum;
 			ExpRuntime = runtime;
 			Owner = owner;
@@ -34,6 +37,8 @@ namespace Jobs
 			this.p = p;
 
 			State = JobState.Waiting;
+
+			this.id = DatabaseManager.addJob(this);
 		}
 
 
@@ -42,7 +47,7 @@ namespace Jobs
 			string returnMsg = p(s);
 
 			if (JobDone != null)
-				JobDone(this, EventArgs.Empty);
+				JobDone(this, new JobEventArgs(this.id, this.State));
 
 			return returnMsg;
 		}

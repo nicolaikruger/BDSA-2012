@@ -13,9 +13,15 @@ namespace Jobs
 
 		public Owner(string name)
 		{
-			id = 0;
+			this.id = 0;
 			this.name = name;
-			Console.WriteLine(DatabaseModule.addOwner(this));
+			this.id = DatabaseManager.addOwner(this);
+		}
+
+		public Owner(int id, string name)
+		{
+			this.id = id;
+			this.name = name;
 		}
 	}
 }

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Jobs;
+using BenchmarkSystem.DB;
 
 namespace Logger
 {
@@ -42,29 +44,34 @@ namespace Logger
 		// Prints out a nice little comment to the console, about a given event //
 		//////////////////////////////////////////////////////////////////////////
 
-        private void onJobSubmit(Object sender, EventArgs e)
+		private void onJobSubmit(Object sender, JobEventArgs e)
         {
             Console.Out.WriteLine(DateTime.Now + ": A job has been submitted.");
+			DatabaseManager.updateJob(e.JobId, e.JobState);
         }
 
-        private void onJobCancel(Object sender, EventArgs e)
+		private void onJobCancel(Object sender, JobEventArgs e)
         {
             Console.Out.WriteLine(DateTime.Now + ": A job has been cancelled.");
+			DatabaseManager.updateJob(e.JobId, e.JobState);
         }
 
-        private void onJobRun(Object sender, EventArgs e)
+		private void onJobRun(Object sender, JobEventArgs e)
         {
             Console.Out.WriteLine(DateTime.Now + ": A job is runnig.");
+			DatabaseManager.updateJob(e.JobId, e.JobState);
         }
 
-        private void onJobTerminate(Object sender, EventArgs e)
+		private void onJobTerminate(Object sender, JobEventArgs e)
         {
             Console.Out.WriteLine(DateTime.Now + ": A job has teminated.");
+			DatabaseManager.updateJob(e.JobId, e.JobState);
         }
 
-        private void onJobFail(Object sender, EventArgs e)
+		private void onJobFail(Object sender, JobEventArgs e)
         {
             Console.Out.WriteLine(DateTime.Now + ": A job has failed.");
+			DatabaseManager.updateJob(e.JobId, e.JobState);
         }
 	}
 }
