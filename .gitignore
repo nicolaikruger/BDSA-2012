@@ -3,7 +3,7 @@ bin
 obj
 
 # config file for DB
-*.config
+App.config
 
 # mstest test results
 TestResults
