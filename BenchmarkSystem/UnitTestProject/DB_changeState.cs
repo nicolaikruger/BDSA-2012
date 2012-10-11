@@ -17,13 +17,17 @@ namespace UnitTestProject
             Job testJob = new Job(1, 10, new Owner("TestOwner"), s => "Hello world");
             int jobId = testJob.id;
 
+			BenchmarkSystem.BenchmarkSystem bs = new BenchmarkSystem.BenchmarkSystem();
+
+			bs.submit(testJob);
+			bs.cancel(testJob);
+
             var result = from job in dbContent.DB_JobSet
-                         where dbContent.DB_JobSet.userId = jobId
+                         where job.jobId == jobId
                          select job;
-            DB_Job resultJob = result;
-            //Convert resultJob to Job so its possible to cancel the job and then
-            //check the status of the job
-            
+            DB_Job resultJob = result.First();
+
+			Assert.AreEqual("Cancelled", resultJob.status);
         }
     }
 }

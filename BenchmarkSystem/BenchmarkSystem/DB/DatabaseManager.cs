@@ -45,6 +45,8 @@ namespace BenchmarkSystem.DB
 				dbContent.DB_JobSet.Add(dbJob);
 				dbContent.SaveChanges();
 
+				addJobLog(dbJob.jobId, job.State);
+
 				return dbJob.jobId;
 			}
 		}

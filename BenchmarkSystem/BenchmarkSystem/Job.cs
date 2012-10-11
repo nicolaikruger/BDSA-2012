@@ -27,6 +27,13 @@ namespace Jobs
 
 		public readonly int id;
 
+		/// <summary>
+		/// Creates a new job and adds it to the database. After adding to the database, it assigns a ID to itself.
+		/// </summary>
+		/// <param name="CPUNum"></param>
+		/// <param name="runtime"></param>
+		/// <param name="owner"></param>
+		/// <param name="p"></param>
 		public Job(int CPUNum, int runtime, Owner owner, Func<string, string> p)
 		{
 			id = 0;

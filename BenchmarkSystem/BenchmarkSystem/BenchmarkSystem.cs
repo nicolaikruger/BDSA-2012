@@ -7,10 +7,11 @@ using BenchmarkSystem.DB;
 
 namespace BenchmarkSystem
 {
-	class BenchmarkSystem
+	public class BenchmarkSystem
 	{
 #if DEBUG
 		public Scheduler scheduler = new Scheduler();
+		public Logger.Logger logger = null;
 #else
         Scheduler scheduler = new Scheduler();
 #endif
@@ -20,7 +21,6 @@ namespace BenchmarkSystem
 		static void Main(string[] args) 
 		{
 			BenchmarkSystem bs = new BenchmarkSystem();
-			Logger.Logger logger = new Logger.Logger(bs);
 
 			Owner ow = new Owner("Nicolai");
 
@@ -38,6 +38,7 @@ namespace BenchmarkSystem
 		public BenchmarkSystem()
 		{
 			subscribe(scheduler);
+			logger = new Logger.Logger(this);
 		}
 
 		/// <summary>

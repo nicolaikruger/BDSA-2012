@@ -7,7 +7,7 @@ using BenchmarkSystem.DB;
 
 namespace Logger
 {
-	class Logger
+	public class Logger
 	{
         public Logger(BenchmarkSystem.BenchmarkSystem system)
         {

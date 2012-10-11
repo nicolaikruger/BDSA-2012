@@ -13,19 +13,20 @@ namespace UnitTestProject
         [TestMethod]
         public void addJob()
         {
-			using (var dbContent = new BenchmarkSystemModelContainer())
-			{
+			BenchmarkSystemModelContainer dbContent = new BenchmarkSystemModelContainer();
+			
 
 				Job testJob = new Job(1, 10, new Owner("TestOwner"), s => "Hello world");
 				int jobId = testJob.id;
 
 				var result = from job in dbContent.DB_JobLogSet
 							 where job.job_jobId == jobId
-							 select job;
-				DB_JobLog resultJob = result.First();
+							 select job.jobId;
 
-				Assert.AreEqual(resultJob.jobId, jobId);
-			}
+                DB_Job resultJob = result.First();
+
+				Assert.AreEqual(jobId, resultJob.jobId);
+			
         }
 
         [TestMethod]
@@ -36,15 +37,18 @@ namespace UnitTestProject
             Job testJob = new Job(1, 10, new Owner("TestOwner"), s => "Hello world");
             int jobId = testJob.id;
 
-            Scheduler sc = new Scheduler();
-            sc.executeAll();
+			BenchmarkSystem.BenchmarkSystem bs = new BenchmarkSystem.BenchmarkSystem();
+			bs.submit(testJob);
+            bs.executeAll();
 
+           
             var result = from job in dbContent.DB_JobLogSet
-                         where dbContent.DB_JobLogSet.job_jobId == jobId 
-                         select job;
-            DB_Job resultJob = result;
+                         where job.job_jobId == jobId
+                         select job.jobId;
+            
+             DB_Job resultJob = result.First();
 
-            Assert.AreEqual(resultJob.status, "Done");
+			 Assert.AreEqual("Done", resultJob.status);
         }
     }
 }

@@ -14,15 +14,15 @@ namespace UnitTestProject
         {
 			using (var dbContent = new BenchmarkSystemModelContainer())
 			{
-
-
+                
 				Job testJob = new Job(1, 10, new Owner("TestOwner"), s => "Hello world");
 				int jobId = testJob.id;
 
 				var result = from job in dbContent.DB_JobSet
-							 where job.user_userId == jobId
+							 where job.jobId == jobId
 							 select job;
-				DB_Job resultJob = result.First();
+				
+                DB_Job resultJob = result.First();
 
 				Assert.AreEqual(resultJob.jobId, jobId);
 			}
@@ -41,12 +41,12 @@ namespace UnitTestProject
 				int jobId = testJob.id;
 
 				var result = from job in dbContent.DB_JobSet
-							 where job.user_userId == jobId
+							 where job.jobId == jobId
 							 select job;
 
 				DB_Job resultJob = result.First();
 
-				Assert.AreEqual(resultJob.status, "Queued");
+				Assert.AreEqual(resultJob.status, "Waiting");
 				Assert.AreEqual(resultJob.user_userId, owId);
 				Assert.AreEqual(resultJob.jobId, jobId);
 			}

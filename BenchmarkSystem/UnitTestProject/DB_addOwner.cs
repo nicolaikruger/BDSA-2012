@@ -18,10 +18,10 @@ namespace UnitTestProject
             int owId = ow.id;
 
             var result = from user in dbContent.DB_userSet
-                         where dbContent.DB_userSet.userid == owId
+                         where user.userId == owId
                          select user;
             
-            DB_user resultUser = result;
+            DB_user resultUser = result.First();
             Assert.AreEqual(resultUser.userId, owId);
         }
 
@@ -34,10 +34,10 @@ namespace UnitTestProject
             int owId = ow.id;
 
             var result = from user in dbContent.DB_userSet
-                         where dbContent.DB_userSet.userid == owId
+                         where user.userId == owId
                          select user;
 
-            DB_user resultUser = result;
+            DB_user resultUser = result.First();
             Assert.AreEqual(resultUser.name, "testOwner");
         }
     }

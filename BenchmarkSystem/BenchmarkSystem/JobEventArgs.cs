@@ -14,8 +14,6 @@ namespace Jobs
 		{
 			this.JobId = jobId;
 			this.JobState = jobState;
-
-			Console.WriteLine("Event -> Jobid = " + JobId);
 		}
 	}
 }
