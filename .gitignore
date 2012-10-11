@@ -12,6 +12,7 @@ obj
 TestResults
 
 glob:**/[Aa]pp.config
+[Aa]pp.config
 
 # LaTex files
 build
