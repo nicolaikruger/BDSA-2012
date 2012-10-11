@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BenchmarkSystem.DB;
 using Jobs;
 using System.Linq;
-using BenchmarkSystem.Scheduler;
+using BenchmarkSystem;
 namespace UnitTestProject
 {
     [TestClass]

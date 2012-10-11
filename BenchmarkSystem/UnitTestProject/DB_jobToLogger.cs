@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BenchmarkSystem.DB;
 using Jobs;
 using System.Linq;
-using BenchmarkSystem.Scheduler;
+using BenchmarkSystem;
 
 namespace UnitTestProject
 {
@@ -13,17 +13,19 @@ namespace UnitTestProject
         [TestMethod]
         public void addJob()
         {
-            BenchmarkSystemModelContainer dbContent = new BenchmarkSystemModelContainer();
+			using (var dbContent = new BenchmarkSystemModelContainer())
+			{
 
-            Job testJob = new Job(1, 10, new Owner("TestOwner"), s => "Hello world");
-            int jobId = testJob.id;
+				Job testJob = new Job(1, 10, new Owner("TestOwner"), s => "Hello world");
+				int jobId = testJob.id;
 
-            var result = from job in dbContent.DB_JobLogSet
-                         where dbContent.DB_JobLogSet.job_jobId == jobId
-                         select job;
-            DB_Job resultJob = result;
+				var result = from job in dbContent.DB_JobLogSet
+							 where job.job_jobId == jobId
+							 select job;
+				DB_JobLog resultJob = result.First();
 
-            Assert.AreEqual(resultJob.jobId, jobId);
+				Assert.AreEqual(resultJob.jobId, jobId);
+			}
         }
 
         [TestMethod]
@@ -34,7 +36,7 @@ namespace UnitTestProject
             Job testJob = new Job(1, 10, new Owner("TestOwner"), s => "Hello world");
             int jobId = testJob.id;
 
-            BenchmarkSystem.Scheduler sc = new BenchmarkSystem.Scheduler();
+            Scheduler sc = new Scheduler();
             sc.executeAll();
 
             var result = from job in dbContent.DB_JobLogSet
