@@ -2,8 +2,6 @@
 bin
 obj
 
-# config file for DB
-*.config
 
 # mstest test results
 TestResults
@@ -42,3 +40,4 @@ build
 *.toc
 *.vrb
 *.xdy
+*.config
