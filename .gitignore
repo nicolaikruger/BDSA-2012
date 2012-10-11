@@ -2,6 +2,11 @@
 bin
 obj
 
+#BenchmarkSystem
+*.config
+
+#UnitTestProject
+*.config
 
 # mstest test results
 TestResults
