@@ -11,6 +11,8 @@ obj
 # mstest test results
 TestResults
 
+glob:**/[Aa]pp.config
+
 # LaTex files
 build
 *.acn
