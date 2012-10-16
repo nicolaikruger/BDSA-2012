@@ -1,11 +1,14 @@
  \documentclass{article}
  % 3 næste linjer skal med får at vi kan skrive specialtegn såsom æ, ø og å. 
   \usepackage[T1]{fontenc}
- % \usepackage[UTF8]{inputenc}
+  \usepackage[UTF8]{inputenc}
   \usepackage{lmodern}
   \usepackage{graphicx}
   \usepackage{newclude}
   \usepackage{float}
+  \usepackage{rotating}
+\usepackage{array}
+\usepackage{ragged2e}  
   
   \begin{document}
   
@@ -50,6 +53,10 @@
         Translated a bit more into English and changes the layout for the operation contracts. &
         Anders J
         \\ \hline
+        01.02.03 & 16-10-2012 &
+        Fixed the layout of the "opreation contract" table &
+        Nicolai Krüger
+        \\ \hline
     \end{tabular}
 \end{table}
   
@@ -77,9 +84,9 @@
    	\hspace{-50pt}
    	\includegraphics[scale=.65]{LatexFiles/Analyze/SystemSequenceDiagram/SSD}
    	\end{figure}
-
+\newpage
 	\include*{LatexFiles/Analyze/OperationContract}   \mbox{}
-	
+	\newpage
    \paragraph{Glossary} \mbox{}
 \subparagraph{Begivenhed} \mbox{}
 

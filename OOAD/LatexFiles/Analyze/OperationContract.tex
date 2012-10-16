@@ -1,87 +1,91 @@
-\paragraph{Operation contracts} \mbox{}
-	\subparagraph{Id}
-	OC-1.0
-	\subparagraph{Name}
-	saveEvent
-	\subparagraph{Parameters} \mbox{}
-	\begin{itemize}
-	\item EventId : EventId
-	\item CreatedAt : Date
-	\item StartDateAndTime : Date
-	\item EndDateAndTime : Date
-	\item Location : String
-	\item Title : String
-	\item Description : String
-	\item Frequency : 
-	\end{itemize}
-	
-	\subparagraph{Use cases} \mbox{}
-	Create event, Edit event
-	
-	\subparagraph{Preconditions} \mbox{}
-	A user wants to save an event
-	
-	\subparagraph{Postconditions} \mbox{}
-	\begin{itemize}
-	\item A Event instance ev was created
-	\item If a event already existed with the given ev.EventID, the old Event instance was deleted, and all associations with the old Event was removed.
-		\item ev.ID became EventID
-		\item ev.TimeAndDate became TimeAndDate
-		\item ev.location became Location       
-		\item ev.Title became Title
-		\item ev.Description became Description
-		\item ev.frequency became Frequency        
-		\item ev.length became Length
-		\item ev.alarm became Alarm 
-	\end{itemize}
-	
 
+%
+% this makes list spacing much better.
+%
+\newenvironment{my_itemize}{
+\vspace{-7mm}
+\begin{list}{\labelitemi}{\leftmargin=5px}
+	\renewcommand{\labelitemi}{$\cdot$}
+  \setlength{\itemsep}{0pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{list}
+}
+
+\newcolumntype{P}[1]{>{\RaggedRight\hspace{0pt}}p{#1}}
+
+%
+% Docment start
+%
 \subparagraph{Operation contracts} \mbox{} 
-  
-  \begin{table}[ht]
-    \begin{tabular}{|l|l|p{90px}|p{50px}|p{90px}|p{90px}|}
+  \begin{sidewaystable}[ht]
+  \caption{Operation contracts}
+ % \def\baselinestretch {}\selectfont %
+% \baselineskip = 14.4pt\relax %% Uncomment this if the result is not compact.
+    \begin{tabular}{|l|l|P{90px}|P{100px}|P{80px}|P{150px}|}
         \hline
         ID & Name & Parameters & References & Precondition & Post condition
         \\ \hline
-        OC-1.0 & saveEvent 
+        	OC-01 
+        & 
+        	saveEvent
         &
-			EventID : EventID
-			TimeAndDate : Date 
-			Location : String 
-			Title : String 
-			Description : String 
-			Frecuency : 
-			Length : Integer
-			Alarm : Date 
-			CalendarID : CalenderID
-        &
-        Use cases: Create event, Edit event
-        &
-        A user wants to save an event.
-        &
-        A Event instance ev was created
-		If a event already existed with the given ev.EventID, the old Event instance was deleted, and all associations with the old Event was removed.
-		ev.ID became EventID
-		ev.TimeAndDate became TimeAndDate
-		ev.location became Location       
-		ev.Title became Title
-		ev.Description became Description
-		ev.frequency became Frequency        
-		ev.length became Length
-		ev.alarm became Alarm        
-   
+        	\begin{my_itemize}
+				\item EventId : EventId
+				\item CreatedAt : Date
+				\item StartDateAndTime : Date
+				\item EndDateAndTime : Date
+				\item Location : String
+				\item Title : String
+				\item Description : String
+				\item Frequency : 
+				\item Length : Integer
+				\item Alarm : Data
+				\item CalendarID : CalendarID
+			\end{my_itemize}
+		&
+			\textbf{Use cases:}
+			\begin{my_itemize}
+				\item[]
+				\item Create event
+				\item Edit event
+			\end{my_itemize}
+			
+		&
+			A user wants to save an event
+		&
+			\begin{my_itemize}
+				\item A Event instance ev was created
+				\item If a event already existed with the given ev.EventID, the old Event instance was deleted, and all associations with the old Event was removed.
+				\item ev.ID became EventID
+				\item ev.TimeAndDate became TimeAndDate
+				\item ev.location became Location       
+				\item ev.Title became Title
+				\item ev.Description became Description
+				\item ev.frequency became Frequency        
+				\item ev.length became Length
+				\item ev.alarm became Alarm 
+			\end{my_itemize}
         \\ \hline        
         OC-02 & deleteEvent 
         &
-        	eventID : EventID
+        	\begin{my_itemize}
+        	\item eventID : EventID
+        	\end{my_itemize}
         &
-        Use cases: Delete event
+		\textbf{Use cases:}
+		\begin{my_itemize}
+			\item[]
+			\item Delete event
+		\end{my_itemize}
         &
-        A user wants to delete a Event.
-        The event has to exist in the system.
+        \begin{my_itemize}
+			\item A user wants to delete a Event.
+     		\item The event has to exist in the system.
+		\end{my_itemize}        
         &
         A confirmation-box has been showed to the user.
         If the user said OK to the confirmation-box, the Event with the given EventID has been deleted, and all associations with the old Event was removed.
         \\ \hline
     \end{tabular}
-\end{table}
+\end{sidewaystable}
+
