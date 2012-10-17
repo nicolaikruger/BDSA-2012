@@ -13,7 +13,6 @@ namespace Jobs
 
 	public class Job
 	{
-
 		private Func<string, string> p { get; set; }
 
 		public int NumberOfCPU { get; private set; }
