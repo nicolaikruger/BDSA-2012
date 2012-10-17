@@ -22,6 +22,7 @@ namespace BenchmarkSystem
 
 		static void Main(string[] args) 
 		{
+
 			BenchmarkSystem bs = new BenchmarkSystem();
 
 			Owner ow = new Owner("Nicolai");
@@ -31,7 +32,7 @@ namespace BenchmarkSystem
 
 			bs.submit(j);
 			bs.executeAll();
-
+            
 			Console.Out.WriteLine("done");
 
 			Console.ReadLine();
