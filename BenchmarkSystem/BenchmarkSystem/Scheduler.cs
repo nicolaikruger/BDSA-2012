@@ -14,13 +14,9 @@ namespace BenchmarkSystem
 #endif
 	{
 #if DEBUG
-		public LinkedList<Job> shortJobQueue	= new LinkedList<Job>();
-		public LinkedList<Job> longJobQueue		= new LinkedList<Job>();
-		public LinkedList<Job> veryLongJobQueue	= new LinkedList<Job>();
+		public LinkedList<Job> JobQueue	= new LinkedList<Job>();
 
-		public HashSet<Job> shortRunningJobs	= new HashSet<Job>();
-		public HashSet<Job> longRunningJobs		= new HashSet<Job>();
-		public HashSet<Job> veryLongRunningJobs	= new HashSet<Job>();
+		public HashSet<Job> RunningJobs	= new HashSet<Job>();
 #else
 		private LinkedList<Job> shortJobQueue = new LinkedList<Job>();
 		private LinkedList<Job> longJobQueue = new LinkedList<Job>();
@@ -253,9 +249,8 @@ namespace BenchmarkSystem
 
         private Job findNextJobToRun(int index)
         {
-            Job job = JobsQueued.get(index);
+            Job job = JobQueue.
 
-           
                 if(job.type == shortJobs)
                     if (shortJobs < 20 && job.NumberOfCPU < AvailableCPU)
                     {
