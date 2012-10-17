@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 10/09/2012 11:57:33
+-- Date Created: 10/17/2012 12:29:46
 -- Generated from EDMX file: C:\Users\Nicolai\Documents\GitHub\BDSA-2012\BenchmarkSystem\BenchmarkSystem\DB\BenchmarkSystemModel.edmx
 -- --------------------------------------------------
 
@@ -17,11 +17,26 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_jobuser]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[DB_JobSet] DROP CONSTRAINT [FK_jobuser];
+GO
+IF OBJECT_ID(N'[dbo].[FK_jobLogjob]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[DB_JobLogSet] DROP CONSTRAINT [FK_jobLogjob];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[DB_userSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[DB_userSet];
+GO
+IF OBJECT_ID(N'[dbo].[DB_JobSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[DB_JobSet];
+GO
+IF OBJECT_ID(N'[dbo].[DB_JobLogSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[DB_JobLogSet];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -39,7 +54,9 @@ CREATE TABLE [dbo].[DB_JobSet] (
     [jobId] int IDENTITY(1,1) NOT NULL,
     [status] nvarchar(max)  NOT NULL,
     [user_userId] int  NOT NULL,
-    [submitDate] datetime  NOT NULL
+    [submitDate] datetime  NOT NULL,
+    [type] nvarchar(max)  NOT NULL,
+    [numberOfDelays] smallint  NOT NULL
 );
 GO
 

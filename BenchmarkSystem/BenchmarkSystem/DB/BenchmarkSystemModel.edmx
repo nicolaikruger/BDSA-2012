@@ -33,6 +33,8 @@
     <Property Name="status" Type="nvarchar(max)" Nullable="false" />
     <Property Name="user_userId" Type="int" Nullable="false" />
     <Property Name="submitDate" Type="datetime" Nullable="false" />
+    <Property Name="type" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="numberOfDelays" Type="smallint" Nullable="false" />
   </EntityType>
   <EntityType Name="DB_JobLogSet">
     <Key>
@@ -158,6 +160,8 @@
           <ScalarProperty Name="status" ColumnName="status" />
           <ScalarProperty Name="user_userId" ColumnName="user_userId" />
           <ScalarProperty Name="submitDate" ColumnName="submitDate" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="numberOfDelays" ColumnName="numberOfDelays" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
