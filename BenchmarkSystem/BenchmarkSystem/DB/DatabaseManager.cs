@@ -41,6 +41,7 @@ namespace BenchmarkSystem.DB
 				dbJob.user_userId = job.Owner.id;
 				dbJob.status = job.State.ToString();
 				dbJob.submitDate = DateTime.Now;
+				
 
 				dbContent.DB_JobSet.Add(dbJob);
 				dbContent.SaveChanges();

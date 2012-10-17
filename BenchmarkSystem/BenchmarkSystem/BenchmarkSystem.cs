@@ -52,7 +52,7 @@ namespace BenchmarkSystem
         public void submit(Job job) 
 		{
 			Console.WriteLine("System -> Jobid = " + job.id);
-			job.State = JobState.Queued;
+			job.State = JobState.QUEUED;
 			OnJobSubmitted(job, new JobEventArgs(job.id, job.State));
 			scheduler.addJob(job);
 		}
@@ -63,7 +63,7 @@ namespace BenchmarkSystem
 		/// <param name="job">The job to remove</param>
         public void cancel(Job job) 
 		{
-			job.State = JobState.Cancelled;
+			job.State = JobState.CANCELLED;
 			OnJobCancelled(job, new JobEventArgs(job.id, job.State));
 			scheduler.removeJob(job);
 		}

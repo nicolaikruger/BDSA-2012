@@ -17,7 +17,6 @@ namespace Jobs
 			{
 				case "WAITING":
 					return JobState.WAITING;
-					break;
 				case "QUEUED":
 					return JobState.QUEUED;
 				case "RUNNING":

@@ -8,14 +8,25 @@ using System.Threading.Tasks;
 
 namespace Jobs
 {
-	
-	public enum JobType { SHORT, LONG, VERY_LONG }
-
 	public class Job
 	{
+		private readonly int minCPU = 1, maxCPU = 10;
+		private int numberOfCPU;
+
+
 		private Func<string, string> p { get; set; }
 
-		public int NumberOfCPU { get; private set; }
+		public int NumberOfCPU 
+		{ 
+			get {return numberOfCPU; }
+			private set
+			{
+				if (value >= minCPU && value <= maxCPU)
+					numberOfCPU = value;
+				else
+					throw new ArgumentException("The number of CPU must be between 1 and 10, including");
+			} 
+		}
 
 		public int ExpRuntime { get; private set; }
 
@@ -71,12 +82,18 @@ namespace Jobs
 		// TODO Add some kind of exception handling, to check if the process fail.
 		public string procces(string s)
 		{
+			this.State = JobState.RUNNING;
 			Task<string> task = Task<string>.Factory.StartNew(() => p(s));
 			string returnMsg = task.Result;
+
+			// Simulates a runtime for the function
+			System.Threading.Thread.Sleep(ExpRuntime);
+
 
 			if (JobDone != null)
 				JobDone(this, new JobEventArgs(this.id, this.State));
 
+			this.State = JobState.DONE;
 			return returnMsg;
 		}
 	}

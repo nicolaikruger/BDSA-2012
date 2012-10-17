@@ -76,6 +76,7 @@
     <Compile Include="Jobs\Job.cs" />
     <Compile Include="Jobs\JobEventArgs.cs" />
     <Compile Include="Jobs\JobState.cs" />
+    <Compile Include="Jobs\JobType.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Owner.cs" />
     <Compile Include="BenchmarkSystem.cs" />

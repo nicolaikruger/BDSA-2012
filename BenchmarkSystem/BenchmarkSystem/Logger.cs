@@ -46,31 +46,31 @@ namespace Logger
 
 		private void onJobSubmit(Object sender, JobEventArgs e)
         {
-            Console.Out.WriteLine(DateTime.Now + ": A job has been submitted.");
+            Console.Out.WriteLine("{0} JobID: {1}:\t Job has been submitted.", DateTime.Now, e.JobId);
 			DatabaseManager.updateJob(e.JobId, e.JobState);
         }
 
 		private void onJobCancel(Object sender, JobEventArgs e)
         {
-            Console.Out.WriteLine(DateTime.Now + ": A job has been cancelled.");
+			Console.Out.WriteLine("{0} JobID: {1}:\t Job has been cancelled.", DateTime.Now, e.JobId);
 			DatabaseManager.updateJob(e.JobId, e.JobState);
         }
 
 		private void onJobRun(Object sender, JobEventArgs e)
         {
-            Console.Out.WriteLine(DateTime.Now + ": A job is runnig.");
+			Console.Out.WriteLine("{0} JobID: {1}:\t Job is runnig.", DateTime.Now, e.JobId);
 			DatabaseManager.updateJob(e.JobId, e.JobState);
         }
 
 		private void onJobTerminate(Object sender, JobEventArgs e)
         {
-            Console.Out.WriteLine(DateTime.Now + ": A job has teminated.");
+			Console.Out.WriteLine("{0} JobID: {1}:\t Job has teminated.", DateTime.Now, e.JobId);
 			DatabaseManager.updateJob(e.JobId, e.JobState);
         }
 
 		private void onJobFail(Object sender, JobEventArgs e)
         {
-            Console.Out.WriteLine(DateTime.Now + ": A job has failed.");
+			Console.Out.WriteLine("{0} JobID: {1}:\t Job has failed.", DateTime.Now, e.JobId);
 			DatabaseManager.updateJob(e.JobId, e.JobState);
         }
 	}
