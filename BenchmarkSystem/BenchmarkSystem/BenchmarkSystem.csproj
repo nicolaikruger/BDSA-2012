@@ -73,8 +73,9 @@
     <Compile Include="DB\DB_user.cs">
       <DependentUpon>BenchmarkSystemModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Job.cs" />
-    <Compile Include="JobEventArgs.cs" />
+    <Compile Include="Jobs\Job.cs" />
+    <Compile Include="Jobs\JobEventArgs.cs" />
+    <Compile Include="Jobs\JobState.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Owner.cs" />
     <Compile Include="BenchmarkSystem.cs" />
