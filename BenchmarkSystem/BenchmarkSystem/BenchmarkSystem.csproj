@@ -48,7 +48,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="DB\BenchmarkSystemModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -78,8 +77,8 @@
     <Compile Include="Jobs\JobEventArgs.cs" />
     <Compile Include="Jobs\JobState.cs" />
     <Compile Include="Jobs\JobType.cs" />
+    <Compile Include="Jobs\Owner.cs" />
     <Compile Include="Logger.cs" />
-    <Compile Include="Owner.cs" />
     <Compile Include="BenchmarkSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scheduler.cs" />
