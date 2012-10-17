@@ -272,17 +272,43 @@ namespace BenchmarkSystem
                         findNextJobToRun(index++);
                     }   
 
-                if(job.type == longJob)
-                    if (longJobs < 20 || job.NumberOfCPU < AvailableCPU)
+               Job job = JobsQueued.get(index);
+
+           
+                if(job.type == LongJobs)
+                    if (longJobs < 20 && job.NumberOfCPU < AvailableCPU)
                     {
                         return job;
                     }
-                if(job.type == veryLongJob)
-                    if (veryLongJobs < 20 || job.NumberOfCPU < AvailableCPU)
+                    else if (job.numberOfdelays = 2)
+                    {
+                        Thread.Sleep(20);
+                        findNextJobToRun(index);
+                    }
+                    else
+                    {
+                        job.delayed();
+                        findNextJobToRun(index++);
+                    }   
+
+            Job job = JobsQueued.get(index);
+
+           
+                if(job.type == VeryLongJob)
+                    if (VeryLongJobs < 20 && job.NumberOfCPU < AvailableCPU)
                     {
                         return job;
                     }
-               
+                    else if (job.numberOfdelays = 2)
+                    {
+                        Thread.Sleep(20);
+                        findNextJobToRun(index);
+                    }
+                    else
+                    {
+                        job.delayed();
+                        findNextJobToRun(index++);
+                    }   
             }
            
         }
