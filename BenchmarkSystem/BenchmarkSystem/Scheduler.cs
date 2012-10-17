@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Jobs;
+using System.Threading;
+
 
 namespace BenchmarkSystem
 {
@@ -248,5 +250,41 @@ namespace BenchmarkSystem
 
 			return jobs.First();
 		}
+
+        private Job findNextJobToRun(int index)
+        {
+            Job job = JobsQueued.get(index);
+
+           
+                if(job.type == shortJobs)
+                    if (shortJobs < 20 && job.NumberOfCPU < AvailableCPU)
+                    {
+                        return job;
+                    }
+                    else if (job.numberOfdelays = 2)
+                    {
+                        Thread.Sleep(20);
+                        findNextJobToRun(index);
+                    }
+                    else
+                    {
+                        job.delayed();
+                        findNextJobToRun(index++);
+                    }   
+
+                if(job.type == longJob)
+                    if (longJobs < 20 || job.NumberOfCPU < AvailableCPU)
+                    {
+                        return job;
+                    }
+                if(job.type == veryLongJob)
+                    if (veryLongJobs < 20 || job.NumberOfCPU < AvailableCPU)
+                    {
+                        return job;
+                    }
+               
+            }
+           
+        }
 	}
 }

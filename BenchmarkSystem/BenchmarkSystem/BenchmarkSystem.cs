@@ -17,6 +17,8 @@ namespace BenchmarkSystem
 #endif
 
         public event EventHandler<JobEventArgs> JobSubmitted, JobCancelled, JobRunning, JobTerminated, JobFailed;
+        public static readonly int NumberOfCPU = 30;
+        public static int AvailableCPU { get; set; }
 
 		static void Main(string[] args) 
 		{
@@ -35,8 +37,10 @@ namespace BenchmarkSystem
 			Console.ReadLine();
 		}
 
+        //TODO : Should be made as a singleton
 		public BenchmarkSystem()
 		{
+            AvailableCPU = NumberOfCPU;
 			subscribe(scheduler);
 			logger = new Logger.Logger(this);
 		}
