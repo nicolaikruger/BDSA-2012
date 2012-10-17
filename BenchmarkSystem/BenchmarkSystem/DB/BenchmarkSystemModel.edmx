@@ -100,6 +100,8 @@
           <NavigationProperty Name="userId" Relationship="BenchmarkSystemModel.jobuser" FromRole="job" ToRole="user" />
           <Property Name="user_userId" Nullable="false" Type="Int32" />
           <Property Type="DateTime" Name="submitDate" Nullable="false" />
+          <Property Type="String" Name="type" Nullable="false" />
+          <Property Type="Int16" Name="numberOfDelays" Nullable="false" />
         </EntityType>
         <Association Name="jobuser">
           <End Type="BenchmarkSystemModel.DB_Job" Role="job" Multiplicity="*" />

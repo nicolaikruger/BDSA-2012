@@ -1,12 +1,43 @@
-﻿﻿using System;
+﻿
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using BenchmarkSystem.DB;
+using System.Threading.Tasks;
 
 namespace Jobs
 {
-	public enum JobState { Waiting, Queued, Running, Done, Failed, Cancelled }
+	public enum JobState { WAITING, QUEUED, RUNNING, DONE, FAILED, CANCELLED }
+
+	public static class JobStateExtensions
+	{
+		public JobState toJobState(this string state)
+		{
+			state = state.ToUpper();
+
+			switch (state)
+			{
+				case "WAITING":
+					return JobState.WAITING;
+					break;
+				case "QUEUED":
+					return JobState.QUEUED;
+				case "RUNNING":
+					return JobState.RUNNING;
+				case "DONE":
+					return JobState.DONE;
+				case "FAILED":
+					return JobState.FAILED;
+				case "CANCELLED":
+					return JobState.CANCELLED;
+				default:
+					throw new NotImplementedException("No JobState with that name is specified!");
+			}
+		}
+	}
+
+	public enum JobType { SHORT, LONG, VERY_LONG }
 
 	public class Job
 	{
@@ -27,6 +58,10 @@ namespace Jobs
 
 		public readonly int id;
 
+		public readonly JobType type;
+
+		public int numberOfDelays = 0;
+
 		/// <summary>
 		/// Creates a new job and adds it to the database. After adding to the database, it assigns a ID to itself.
 		/// </summary>
@@ -43,15 +78,30 @@ namespace Jobs
 
 			this.p = p;
 
-			State = JobState.Waiting;
+			State = JobState.WAITING;
 
 			this.id = DatabaseManager.addJob(this);
+
+			if(runtime >= 100 && runtime <= 500)
+			{ 
+				this.type = JobType.SHORT;
+			} 
+			else if (runtime >= 600 && runtime <= 2000)
+			{ 
+				this.type = JobType.LONG;
+			} 
+			else if (runtime >= 2100 && runtime <= 5000)
+			{ 
+				this.type = JobType.VERY_LONG;
+			}
 		}
 
 
+		// TODO Add some kind of exception handling, to check if the process fail.
 		public string procces(string s)
 		{
-			string returnMsg = p(s);
+			Task<string> task = Task<string>.Factory.StartNew(() => p(s));
+			string returnMsg = task.Result;
 
 			if (JobDone != null)
 				JobDone(this, new JobEventArgs(this.id, this.State));
