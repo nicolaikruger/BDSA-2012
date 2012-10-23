@@ -15,16 +15,11 @@ namespace BenchmarkSystem
 #if DEBUG
 		public List<Job> JobQueue = new List<Job>();
 		public HashSet<Job> RunningJobs = new HashSet<Job>();
-		private int shortRunningJobs, longRunningJobs, veryLongRunningJobs;
-
+		public int shortRunningJobs, longRunningJobs, veryLongRunningJobs;
 #else
-		private LinkedList<Job> shortJobQueue = new LinkedList<Job>();
-		private LinkedList<Job> longJobQueue = new LinkedList<Job>();
-		private LinkedList<Job> veryLongJobQueue = new LinkedList<Job>();
-
-		private HashSet<Job> shortRunningJobs = new HashSet<Job>();
-		private HashSet<Job> longRunningJobs = new HashSet<Job>();
-		private HashSet<Job> veryLongRunningJobs = new HashSet<Job>();
+		private List<Job> JobQueue = new List<Job>();
+		private HashSet<Job> RunningJobs = new HashSet<Job>();
+		private int shortRunningJobs, longRunningJobs, veryLongRunningJobs;
 #endif
 		internal event EventHandler<JobEventArgs> JobDone, JobRunning;
 

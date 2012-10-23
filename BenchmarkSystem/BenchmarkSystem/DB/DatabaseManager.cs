@@ -16,9 +16,9 @@ namespace BenchmarkSystem.DB
 		/// <returns>Returns the ID the owner has been assigned with</returns>
 		public static int addOwner(Owner ow)
 		{
-			using (var dbContent = new BenchmarkSystemModelContainer())
+			using (var dbContent = new BenchmarkDBEntities())
 			{
-				DB_user user = new DB_user();
+				DB_userSet user = new DB_userSet();
 				user.name = ow.name;
 
 				dbContent.DB_userSet.Add(user);
@@ -35,9 +35,9 @@ namespace BenchmarkSystem.DB
 		/// <returns>Returns the ID the job has been assigned with</returns>
 		public static int addJob(Job job)
 		{
-			using (var dbContent = new BenchmarkSystemModelContainer())
+			using (var dbContent = new BenchmarkDBEntities())
 			{
-				DB_Job dbJob = new DB_Job();
+				DB_JobSet dbJob = new DB_JobSet();
 				dbJob.user_userId = job.Owner.id;
 				dbJob.status = job.State.ToString();
 				dbJob.submitDate = DateTime.Now;
@@ -60,12 +60,12 @@ namespace BenchmarkSystem.DB
 		{
 			ICollection<Owner> returnCollection = new List<Owner>();
 
-			using (var dbContent = new BenchmarkSystemModelContainer())
+			using (var dbContent = new BenchmarkDBEntities())
 			{
 				var result = from user in dbContent.DB_userSet
 							 select user;
 
-				foreach (DB_user user in result)
+				foreach (DB_userSet user in result)
 				{
 					returnCollection.Add(new Owner(user.userId, user.name));
 				}
@@ -84,13 +84,13 @@ namespace BenchmarkSystem.DB
 			throw new NotImplementedException("This method is comming in a later exercise");
 			ICollection<Job> returnCollection = new List<Job>();
 
-			using (var dbContent = new BenchmarkSystemModelContainer())
+			using (var dbContent = new BenchmarkDBEntities())
 			{
 				var result = from job in dbContent.DB_JobSet
 							 where job.user_userId == userId
 							 select job;
 
-				foreach (DB_Job job in result)
+				foreach (DB_JobSet job in result)
 				{
 					// Insert black-magic here!
 				}
@@ -130,7 +130,7 @@ namespace BenchmarkSystem.DB
 		/// <returns>A collection of jobs</returns>
 		public static int jobsWithinPeriod(DateTime start, DateTime end)
 		{
-			using (var dbContent = new BenchmarkSystemModelContainer())
+			using (var dbContent = new BenchmarkDBEntities())
 			{
 				var result = from job in dbContent.DB_JobSet
 							 where start <= job.submitDate && job.submitDate <= end
@@ -150,7 +150,7 @@ namespace BenchmarkSystem.DB
 		/// <returns>Number of jobs</returns>
 		public static int jobsWithinPeriodByUser(DateTime start, DateTime end, int userId)
 		{
-			using (var dbContent = new BenchmarkSystemModelContainer())
+			using (var dbContent = new BenchmarkDBEntities())
 			{
 				var result = from job in dbContent.DB_JobSet
 							 where job.user_userId == userId 
@@ -172,13 +172,13 @@ namespace BenchmarkSystem.DB
 		{
 			Console.WriteLine("DBM -> Jobid = " + jobId);
 
-			using (var dbContent = new BenchmarkSystemModelContainer())
+			using (var dbContent = new BenchmarkDBEntities())
 			{
 				var result = from job in dbContent.DB_JobSet
 							 where job.jobId == jobId
 							 select job;
 				
-				DB_Job tmpJob = result.First();
+				DB_JobSet tmpJob = result.First();
 				tmpJob.status = jobState.ToString();
 
 					dbContent.SaveChanges();
@@ -194,9 +194,9 @@ namespace BenchmarkSystem.DB
 		/// <param name="jobstate">The new state of the job</param>
 		public static void addJobLog(int jobId, JobState jobstate)
 		{
-			using (var dbContent = new BenchmarkSystemModelContainer())
+			using (var dbContent = new BenchmarkDBEntities())
 			{
-				DB_JobLog joblog = new DB_JobLog();
+				DB_JobLogSet joblog = new DB_JobLogSet();
 				joblog.dateTime = DateTime.Now;
 				joblog.job_jobId = jobId;
 				joblog.status = jobstate.ToString();
@@ -219,13 +219,13 @@ namespace BenchmarkSystem.DB
 		/// <returns>A owner from the database</returns>
 		public static Owner getOwner(int id)
 		{
-			using (var dbContent = new BenchmarkSystemModelContainer())
+			using (var dbContent = new BenchmarkDBEntities())
 			{
 				var dbUser = from user in dbContent.DB_userSet
 							 where user.userId == id
 							 select user;
 
-				DB_user tmpUser = dbUser.First();
+				DB_userSet tmpUser = dbUser.First();
 				
 				return new Owner(tmpUser.userId, tmpUser.name); ;
 			}

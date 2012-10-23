@@ -64,13 +64,13 @@
       <DependentUpon>BenchmarkSystemModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="DB\DatabaseManager.cs" />
-    <Compile Include="DB\DB_Job.cs">
+    <Compile Include="DB\DB_JobLogSet.cs">
       <DependentUpon>BenchmarkSystemModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DB\DB_JobLog.cs">
+    <Compile Include="DB\DB_JobSet.cs">
       <DependentUpon>BenchmarkSystemModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DB\DB_user.cs">
+    <Compile Include="DB\DB_userSet.cs">
       <DependentUpon>BenchmarkSystemModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Jobs\Job.cs" />
@@ -84,15 +84,13 @@
     <Compile Include="Scheduler.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <EntityDeploy Include="DB\BenchmarkSystemModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>BenchmarkSystemModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="DB\BenchmarkSystemModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>BenchmarkSystemModel.edmx</DependentUpon>

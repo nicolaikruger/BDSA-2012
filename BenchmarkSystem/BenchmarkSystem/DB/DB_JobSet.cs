@@ -12,13 +12,21 @@ namespace BenchmarkSystem.DB
     using System;
     using System.Collections.Generic;
     
-    public partial class DB_Job
+    public partial class DB_JobSet
     {
+        public DB_JobSet()
+        {
+            this.DB_JobLogSet = new HashSet<DB_JobLogSet>();
+        }
+    
         public int jobId { get; set; }
         public string status { get; set; }
         public int user_userId { get; set; }
         public System.DateTime submitDate { get; set; }
+        public string type { get; set; }
+        public short numberOfDelays { get; set; }
     
-        public virtual DB_user userId { get; set; }
+        public virtual ICollection<DB_JobLogSet> DB_JobLogSet { get; set; }
+        public virtual DB_userSet DB_userSet { get; set; }
     }
 }

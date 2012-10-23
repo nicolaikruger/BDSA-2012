@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9e319a1abaa7440c97269d6c43daacea" Name="Diagram1" ZoomLevel="86" >
-        <EntityTypeShape EntityType="BenchmarkSystemModel.DB_user" Width="1.5" PointX="3.5" PointY="1.875" />
-        <EntityTypeShape EntityType="BenchmarkSystemModel.DB_Job" Width="1.5" PointX="6.625" PointY="1.75" />
-        <AssociationConnector Association="BenchmarkSystemModel.jobuser" />
-        <EntityTypeShape EntityType="BenchmarkSystemModel.DB_JobLog" Width="1.5" PointX="9.375" PointY="1.875" />
-        <AssociationConnector Association="BenchmarkSystemModel.jobLogjob" />
+      <Diagram DiagramId="0e14fdfb62f147e3987dc7d5fae1fc03" Name="Diagram1">
+        <EntityTypeShape EntityType="BenchmarkDBModel.DB_JobLogSet" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BenchmarkDBModel.DB_JobSet" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="BenchmarkDBModel.DB_userSet" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <AssociationConnector Association="BenchmarkDBModel.FK_jobLogjob" ManuallyRouted="false" />
+        <AssociationConnector Association="BenchmarkDBModel.FK_jobuser" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -12,13 +12,16 @@ namespace BenchmarkSystem.DB
     using System;
     using System.Collections.Generic;
     
-    public partial class DB_JobLog
+    public partial class DB_userSet
     {
-        public int logId { get; set; }
-        public string status { get; set; }
-        public System.DateTime dateTime { get; set; }
-        public int job_jobId { get; set; }
+        public DB_userSet()
+        {
+            this.DB_JobSet = new HashSet<DB_JobSet>();
+        }
     
-        public virtual DB_Job jobId { get; set; }
+        public int userId { get; set; }
+        public string name { get; set; }
+    
+        public virtual ICollection<DB_JobSet> DB_JobSet { get; set; }
     }
 }
