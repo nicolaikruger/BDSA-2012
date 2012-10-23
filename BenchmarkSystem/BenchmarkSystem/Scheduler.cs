@@ -172,8 +172,11 @@ namespace BenchmarkSystem
 
 		}
 
-
+#if DEBUG
+		public Job findNextJobToRun()
+#else
 		private Job findNextJobToRun()
+#endif
 		{
 			for (int i = 0; i > JobQueue.Count(); i++)
 			{
