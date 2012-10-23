@@ -10,7 +10,7 @@ namespace UnitTestProject
 	public class SchedulerTest_popJob
 	{
 		[TestMethod]
-		public void popJob_popShortJob()
+		public void popJob_popJob()
 		{
 			Owner ow = new Owner("Nicolai");
 			Job j1 = new Job(1, 30000, ow, s => "Hello world");

@@ -10,7 +10,7 @@ namespace UnitTestProject
 	public class SchedulerTest_removeJob
 	{
 		[TestMethod]
-		public void removeJob_removeFromShortQueue()
+		public void removeJob_removeFromQueue()
 		{
 			Owner ow = new Owner("Nicolai");
 			Job job = new Job(1, 30000, ow, s => "Hello world");
@@ -19,72 +19,20 @@ namespace UnitTestProject
 			sh.addJob(job);
 			sh.removeJob(job);
 
-			Assert.AreEqual(0, sh.shortJobQueue.Count);
+			Assert.AreEqual(0, sh.JobQueue.Count);
 		}
 
 		[TestMethod]
-		public void removeJob_removeFromShortRunningList()
+		public void removeJob_removeFromRunningList()
 		{
 			Owner ow = new Owner("Nicolai");
 			Job job = new Job(1, 30000, ow, s => "Hello world");
 			Scheduler sh = new Scheduler();
 
-			sh.shortRunningJobs.Add(job);
+			sh.RunningJobs.Add(job);
 			sh.removeJob(job);
 
-			Assert.AreEqual(0, sh.shortRunningJobs.Count);
-		}
-
-		[TestMethod]
-		public void removeJob_removeFromLongQueue()
-		{
-			Owner ow = new Owner("Nicolai");
-			Job job = new Job(1, 30001, ow, s => "Hello world");
-			Scheduler sh = new Scheduler();
-
-			sh.addJob(job);
-			sh.removeJob(job);
-
-			Assert.AreEqual(0, sh.longJobQueue.Count);
-		}
-
-		[TestMethod]
-		public void removeJob_removeFromLongRunningList()
-		{
-			Owner ow = new Owner("Nicolai");
-			Job job = new Job(1, 30001, ow, s => "Hello world");
-			Scheduler sh = new Scheduler();
-
-			sh.longRunningJobs.Add(job);
-			sh.removeJob(job);
-
-			Assert.AreEqual(0, sh.longRunningJobs.Count);
-		}
-
-		[TestMethod]
-		public void removeJob_removeFromVeryLongQueue()
-		{
-			Owner ow = new Owner("Nicolai");
-			Job job = new Job(1, 120001, ow, s => "Hello world");
-			Scheduler sh = new Scheduler();
-
-			sh.addJob(job);
-			sh.removeJob(job);
-
-			Assert.AreEqual(0, sh.veryLongJobQueue.Count);
-		}
-
-		[TestMethod]
-		public void removeJob_removeFromVeryLongRunningList()
-		{
-			Owner ow = new Owner("Nicolai");
-			Job job = new Job(1, 120001, ow, s => "Hello world");
-			Scheduler sh = new Scheduler();
-
-			sh.veryLongRunningJobs.Add(job);
-			sh.removeJob(job);
-
-			Assert.AreEqual(0, sh.veryLongJobQueue.Count);
+			Assert.AreEqual(0, sh.RunningJobs.Count);
 		}
 	}
 }
