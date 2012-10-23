@@ -9,7 +9,7 @@ namespace Jobs
 
 	public static class JobStateExtensions
 	{
-		public JobState toJobState(this string state)
+		public static JobState toJobState(this string state)
 		{
 			state = state.ToUpper();
 

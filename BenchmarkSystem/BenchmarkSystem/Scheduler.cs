@@ -13,9 +13,9 @@ namespace BenchmarkSystem
 #endif
 	{
 #if DEBUG
-		public List<Job> JobQueue	= new List<Job>();
-		public HashSet<Job> RunningJobs	= new HashSet<Job>();
-        private int shortRunningJobs, longRunningJobs, veryLongRunningJobs;
+		public List<Job> JobQueue = new List<Job>();
+		public HashSet<Job> RunningJobs = new HashSet<Job>();
+		private int shortRunningJobs, longRunningJobs, veryLongRunningJobs;
 
 #else
 		private LinkedList<Job> shortJobQueue = new LinkedList<Job>();
@@ -36,21 +36,21 @@ namespace BenchmarkSystem
 			int totalQueued = JobQueue.Count;
 			int totalRunning = RunningJobs.Count;
 
-            int shortJobsQueued = 0;
-            int longJobsQueued = 0;
-            int verylongJobsQueued = 0;
-            for(int i = 0; i < JobQueue.Count; i++)
-            {
-                Job tmp = JobQueue.ElementAt(i);
-                
-                if(tmp.type == JobType.SHORT)
-                    shortJobsQueued++;
-                else if(tmp.type == JobType.LONG)
-                    longJobsQueued++;
-                else if(tmp.type == JobType.VERY_LONG)
-                    verylongJobsQueued++;
-               
-            }
+			int shortJobsQueued = 0;
+			int longJobsQueued = 0;
+			int verylongJobsQueued = 0;
+			for (int i = 0; i < JobQueue.Count; i++)
+			{
+				Job tmp = JobQueue.ElementAt(i);
+
+				if (tmp.type == JobType.SHORT)
+					shortJobsQueued++;
+				else if (tmp.type == JobType.LONG)
+					longJobsQueued++;
+				else if (tmp.type == JobType.VERY_LONG)
+					verylongJobsQueued++;
+
+			}
 
 			Console.Out.WriteLine("\n+-----------------------------------------------+");
 			Console.Out.WriteLine("|                    STATUS:                    |");
@@ -79,13 +79,13 @@ namespace BenchmarkSystem
 		{
 			while (JobQueue.Count() > 0)
 			{
-					Job tmp = findNextJobToRun();
-                    JobQueue.Remove(tmp);
-					RunningJobs.Add(tmp);
-					tmp.JobDone += onJobDone;
-					JobEventArgs e = new JobEventArgs(tmp.id, tmp.State);
-					OnJobRunning(tmp, e);
-					tmp.procces("");
+				Job tmp = findNextJobToRun();
+				JobQueue.Remove(tmp);
+				RunningJobs.Add(tmp);
+				tmp.JobDone += onJobDone;
+				JobEventArgs e = new JobEventArgs(tmp.id, tmp.State);
+				OnJobRunning(tmp, e);
+				tmp.procces("");
 			}
 		}
 
@@ -119,9 +119,9 @@ namespace BenchmarkSystem
 #else
 		internal void removeJob(Job job)
 #endif
-        {
+		{
 			JobQueue.Remove(job);
-        }
+		}
 
 		/// <summary>
 		/// Adds a job to the scheduler. The job is automaticly placed in the right queue.
@@ -132,10 +132,10 @@ namespace BenchmarkSystem
 #else
 		internal void addJob(Job job)
 #endif
-        {
+		{
 			job.timeStamp = DateTime.Now;
-            JobQueue.Add(job);
-        }
+			JobQueue.Add(job);
+		}
 
 		/// <summary>
 		/// Returns the job that was added to the scheduler first.
@@ -152,44 +152,43 @@ namespace BenchmarkSystem
 		}
 
 
-        private Job findNextJobToRun()
-        {
-                for(int i = 0; i > JobQueue.Count(); i++)
-                    {
-                        Job job = JobQueue.ElementAt(i);
-                        
-                        if(job.type == JobType.SHORT)
-                           return findJob(job, shortRunningJobs);
-                        
-                        if(job.type == JobType.LONG)
-                           return findJob(job, longRunningJobs);
-                        
-                        if(job.type == JobType.VERY_LONG)
-                           return findJob(job, veryLongRunningJobs);
-                }
-                System.Threading.Thread.Sleep(100);
-                return findNextJobToRun();
+		private Job findNextJobToRun()
+		{
+			for (int i = 0; i > JobQueue.Count(); i++)
+			{
+				Job job = JobQueue.ElementAt(i);
 
-            }
+				if (job.type == JobType.SHORT)
+					return findJob(job, shortRunningJobs);
 
-        private Job findJob(Job job, int runningJobs)
-        {
-              if (runningJobs < 20 && job.NumberOfCPU < BenchmarkSystem.AvailableCPU)
-              {
-                    return job;
-              }
-              else if (job.numberOfDelays == 2)
-              {
-                    System.Threading.Thread.Sleep(100);
-                    return findNextJobToRun();
-              }
-              else
-              {
-                    job.numberOfDelays++;
-                    return findNextJobToRun();
-              }  
-        }
-           
-        }
+				if (job.type == JobType.LONG)
+					return findJob(job, longRunningJobs);
+
+				if (job.type == JobType.VERY_LONG)
+					return findJob(job, veryLongRunningJobs);
+			}
+			System.Threading.Thread.Sleep(100);
+			return findNextJobToRun();
+
+		}
+
+		private Job findJob(Job job, int runningJobs)
+		{
+			if (runningJobs < 20 && job.NumberOfCPU < BenchmarkSystem.AvailableCPU)
+			{
+				return job;
+			}
+			else if (job.numberOfDelays == 2)
+			{
+				System.Threading.Thread.Sleep(100);
+				return findNextJobToRun();
+			}
+			else
+			{
+				job.numberOfDelays++;
+				return findNextJobToRun();
+			}
+		}
+
 	}
 }

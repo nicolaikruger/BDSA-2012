@@ -9,7 +9,7 @@ namespace Jobs
 
 	public static class JobTypeExtentions
 	{
-		public JobType toJobType(this string type)
+		public static JobType toJobType(this string type)
 		{
 			type = type.ToUpper();
 
