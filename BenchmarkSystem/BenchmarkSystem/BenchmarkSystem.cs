@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Jobs;
 using BenchmarkSystem.DB;
+using System.Threading;
 
 namespace BenchmarkSystem
 {
@@ -24,8 +25,12 @@ namespace BenchmarkSystem
 		{
 
 			BenchmarkSystem bs = new BenchmarkSystem();
-
-			Owner ow = new Owner("Nicolai");
+           
+            //Creates a clientThread
+            ClientSimulation cs = new ClientSimulation(bs);
+            Thread clientThread = new Thread(() => cs.createRandomJob());
+			
+            Owner ow = new Owner("Nicolai");
 
 			Job j = new Job(1, 2, ow, s => "Hello world");
 			Console.WriteLine("Job: " + j.id);
