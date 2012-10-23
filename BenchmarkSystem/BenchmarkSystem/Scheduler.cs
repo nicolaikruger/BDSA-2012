@@ -79,9 +79,11 @@ namespace BenchmarkSystem
 				RunningJobs.Add(tmp);
 				incrementRunningJobs(tmp);
 				tmp.JobDone += onJobDone;
+				BenchmarkSystem.AvailableCPU -= tmp.NumberOfCPU;
 				JobEventArgs e = new JobEventArgs(tmp.id, tmp.State);
 				OnJobRunning(tmp, e);
 				tmp.procces("");
+				
 			}
 		}
 
@@ -111,8 +113,9 @@ namespace BenchmarkSystem
 		{
 			Job job = (Job)o;
 			decrementRunningJobs(job);
+			BenchmarkSystem.AvailableCPU += job.NumberOfCPU;
 			job.JobDone -= onJobDone;
-			removeJob(job);
+			removeRunningJob(job);
 			JobEventArgs newE = new JobEventArgs(job.id, job.State);
 
 			if (JobDone != null)
@@ -142,6 +145,11 @@ namespace BenchmarkSystem
 #endif
 		{
 			JobQueue.Remove(job);
+		}
+
+		private void removeRunningJob(Job job)
+		{
+			RunningJobs.Remove(job);
 		}
 
 		/// <summary>
@@ -179,39 +187,44 @@ namespace BenchmarkSystem
 		private Job findNextJobToRun()
 #endif
 		{
-			for (int i = 0; i > JobQueue.Count(); i++)
+			return findNextJobToRun(0);
+		}
+
+		private Job findNextJobToRun(int startAt)
+		{
+			for (int i = startAt; i < JobQueue.Count(); i++)
 			{
 				Job job = JobQueue.ElementAt(i);
 
 				if (job.type == JobType.SHORT)
-					return findJob(job, shortRunningJobs);
+					return findJob(job, shortRunningJobs, i);
 
 				if (job.type == JobType.LONG)
-					return findJob(job, longRunningJobs);
+					return findJob(job, longRunningJobs, i);
 
 				if (job.type == JobType.VERY_LONG)
-					return findJob(job, veryLongRunningJobs);
+					return findJob(job, veryLongRunningJobs, i);
 			}
 			System.Threading.Thread.Sleep(100);
 			return findNextJobToRun();
 
 		}
 
-		private Job findJob(Job job, int runningJobs)
+		private Job findJob(Job job, int runningJobs, int i)
 		{
-			if (runningJobs < 20 && job.NumberOfCPU < BenchmarkSystem.AvailableCPU)
+			if (runningJobs < 20 && job.NumberOfCPU <= BenchmarkSystem.AvailableCPU)
 			{
 				return job;
 			}
 			else if (job.numberOfDelays == 2)
 			{
 				System.Threading.Thread.Sleep(100);
-				return findNextJobToRun();
+				return findNextJobToRun(i);
 			}
 			else
 			{
 				job.numberOfDelays++;
-				return findNextJobToRun();
+				return findNextJobToRun(i + 1);
 			}
 		}
 

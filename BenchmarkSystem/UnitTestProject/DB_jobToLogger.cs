@@ -48,7 +48,7 @@ namespace UnitTestProject
             
              DB_JobSet resultJob = result.First();
 
-			 Assert.AreEqual("Done", resultJob.status);
+			 Assert.AreEqual("DONE", resultJob.status);
         }
     }
 }

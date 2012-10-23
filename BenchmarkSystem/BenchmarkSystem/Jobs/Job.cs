@@ -89,11 +89,10 @@ namespace Jobs
 			// Simulates a runtime for the function
 			System.Threading.Thread.Sleep(ExpRuntime);
 
-
+			this.State = JobState.DONE;
 			if (JobDone != null)
 				JobDone(this, new JobEventArgs(this.id, this.State));
 
-			this.State = JobState.DONE;
 			return returnMsg;
 		}
 	}
