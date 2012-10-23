@@ -82,11 +82,24 @@ namespace BenchmarkSystem
 				Job tmp = findNextJobToRun();
 				JobQueue.Remove(tmp);
 				RunningJobs.Add(tmp);
+				incrementRunningJobs(tmp);
 				tmp.JobDone += onJobDone;
 				JobEventArgs e = new JobEventArgs(tmp.id, tmp.State);
 				OnJobRunning(tmp, e);
 				tmp.procces("");
 			}
+		}
+
+#if DEBUG
+		public void incrementRunningJobs(Job job)
+#else 
+		private void incrementRunningJobs(Job job)
+#endif
+		{
+			JobType type = job.type;
+			if (type == JobType.SHORT) shortRunningJobs++;
+			else if (type == JobType.LONG) longRunningJobs++;
+			else if (type == JobType.VERY_LONG) veryLongRunningJobs++;
 		}
 
 		private void OnJobRunning(Job job, JobEventArgs e)
@@ -102,12 +115,25 @@ namespace BenchmarkSystem
 		private void onJobDone(Object o, JobEventArgs e)
 		{
 			Job job = (Job)o;
+			decrementRunningJobs(job);
 			job.JobDone -= onJobDone;
 			removeJob(job);
 			JobEventArgs newE = new JobEventArgs(job.id, job.State);
 
 			if (JobDone != null)
 				JobDone(o, newE);
+		}
+
+#if DEBUG
+		public void decrementRunningJobs(Job job)
+#else 
+		private void incrementRunningJobs(Job job)
+#endif
+		{
+			JobType type = job.type;
+			if (type == JobType.SHORT) shortRunningJobs--;
+			else if (type == JobType.LONG) longRunningJobs--;
+			else if (type == JobType.VERY_LONG) veryLongRunningJobs--;
 		}
 
 		/// <summary>
