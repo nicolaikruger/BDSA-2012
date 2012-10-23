@@ -68,6 +68,7 @@
     <Compile Include="SchedulerTest_removeJob.cs" />
     <Compile Include="SchedulerTest_popJob.cs" />
     <Compile Include="SchedulerTest_executeAll.cs" />
+    <Compile Include="SchedulerTest_findNextJobToRun.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BenchmarkSystem\BenchmarkSystem.csproj">

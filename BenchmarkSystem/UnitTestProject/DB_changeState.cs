@@ -27,7 +27,7 @@ namespace UnitTestProject
                          select job;
             DB_JobSet resultJob = result.First();
 
-			Assert.AreEqual("Cancelled", resultJob.status);
+			Assert.AreEqual("CANCELLED", resultJob.status);
         }
     }
 }

@@ -46,7 +46,7 @@ namespace UnitTestProject
 
 				DB_JobSet resultJob = result.First();
 
-				Assert.AreEqual(resultJob.status, "Waiting");
+				Assert.AreEqual("WAITING", resultJob.status);
 				Assert.AreEqual(resultJob.user_userId, owId);
 				Assert.AreEqual(resultJob.jobId, jobId);
 			}

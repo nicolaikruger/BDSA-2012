@@ -14,7 +14,7 @@ namespace BenchmarkSystem
 		public Scheduler scheduler = new Scheduler();
 		public Logger.Logger logger = null;
 #else
-        Scheduler scheduler = new Scheduler();
+        private Scheduler scheduler = new Scheduler();
 #endif
 
         public event EventHandler<JobEventArgs> JobSubmitted, JobCancelled, JobRunning, JobTerminated, JobFailed;

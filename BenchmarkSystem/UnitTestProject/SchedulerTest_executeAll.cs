@@ -34,14 +34,11 @@ namespace UnitTestProject
 			// Sleeps for a second to make sure that all Jobs gets done
 			System.Threading.Thread.Sleep(1000);
 
-			Assert.AreEqual(0, sh.shortJobQueue.Count);
-			Assert.AreEqual(0, sh.shortRunningJobs.Count);
-			
-			Assert.AreEqual(0, sh.longJobQueue.Count);
-			Assert.AreEqual(0, sh.longRunningJobs.Count);
+			Assert.AreEqual(0, sh.JobQueue.Count);
 
-			Assert.AreEqual(0, sh.veryLongJobQueue.Count);
-			Assert.AreEqual(0, sh.veryLongJobQueue.Count);
+			Assert.AreEqual(0, sh.shortRunningJobs);
+			Assert.AreEqual(0, sh.longRunningJobs);
+			Assert.AreEqual(0, sh.veryLongRunningJobs);
 		}
 	}
 }

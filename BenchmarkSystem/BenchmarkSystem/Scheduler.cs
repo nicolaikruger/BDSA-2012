@@ -169,8 +169,9 @@ namespace BenchmarkSystem
 #endif
 		{
 			return JobQueue.First();
-
 		}
+
+
 
 #if DEBUG
 		public Job findNextJobToRun()

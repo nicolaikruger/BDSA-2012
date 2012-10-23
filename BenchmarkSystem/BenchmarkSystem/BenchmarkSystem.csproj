@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClientSimulation.cs" />
     <Compile Include="DB\BenchmarkSystemModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

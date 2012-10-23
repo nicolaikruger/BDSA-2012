@@ -41,10 +41,19 @@ namespace BenchmarkSystem.DB
 				dbJob.user_userId = job.Owner.id;
 				dbJob.status = job.State.ToString();
 				dbJob.submitDate = DateTime.Now;
+				dbJob.type = job.type.ToString();
+				dbJob.numberOfDelays = job.numberOfDelays;
 				
 
 				dbContent.DB_JobSet.Add(dbJob);
-				dbContent.SaveChanges();
+				try
+				{
+					dbContent.SaveChanges();
+				}
+				catch (Exception e)
+				{
+					throw;
+				}
 
 				addJobLog(dbJob.jobId, job.State);
 

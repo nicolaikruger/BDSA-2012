@@ -42,7 +42,7 @@ namespace Jobs
 
 		public readonly JobType type;
 
-		public int numberOfDelays = 0;
+		public short numberOfDelays = 0;
 
 		/// <summary>
 		/// Creates a new job and adds it to the database. After adding to the database, it assigns a ID to itself.
