@@ -12,7 +12,7 @@ namespace UnitTestProject
         [TestMethod]
         public void cancelJob()
         {
-            BenchmarkSystemModelContainer dbContent = new BenchmarkSystemModelContainer();
+            BenchmarkDBEntities dbContent = new BenchmarkDBEntities();
 
             Job testJob = new Job(1, 10, new Owner("TestOwner"), s => "Hello world");
             int jobId = testJob.id;
@@ -25,7 +25,7 @@ namespace UnitTestProject
             var result = from job in dbContent.DB_JobSet
                          where job.jobId == jobId
                          select job;
-            DB_Job resultJob = result.First();
+            DB_JobSet resultJob = result.First();
 
 			Assert.AreEqual("Cancelled", resultJob.status);
         }

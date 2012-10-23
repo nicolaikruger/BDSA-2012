@@ -12,7 +12,7 @@ namespace UnitTestProject
         [TestMethod]
         public void addJob()
         {
-			using (var dbContent = new BenchmarkSystemModelContainer())
+			using (var dbContent = new BenchmarkDBEntities())
 			{
                 
 				Job testJob = new Job(1, 10, new Owner("TestOwner"), s => "Hello world");
@@ -22,7 +22,7 @@ namespace UnitTestProject
 							 where job.jobId == jobId
 							 select job;
 				
-                DB_Job resultJob = result.First();
+                DB_JobSet resultJob = result.First();
 
 				Assert.AreEqual(resultJob.jobId, jobId);
 			}
@@ -31,7 +31,7 @@ namespace UnitTestProject
         [TestMethod]
         public void checkJobInfo()
         {
-			using (var dbContent = new BenchmarkSystemModelContainer())
+			using (var dbContent = new BenchmarkDBEntities())
 			{
 
 				Owner ow = new Owner("TestAnders");
@@ -44,7 +44,7 @@ namespace UnitTestProject
 							 where job.jobId == jobId
 							 select job;
 
-				DB_Job resultJob = result.First();
+				DB_JobSet resultJob = result.First();
 
 				Assert.AreEqual(resultJob.status, "Waiting");
 				Assert.AreEqual(resultJob.user_userId, owId);

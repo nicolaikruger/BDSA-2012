@@ -12,7 +12,7 @@ namespace UnitTestProject
         [TestMethod]
         public void addOwner()
         {
-            BenchmarkSystemModelContainer dbContent = new BenchmarkSystemModelContainer();
+            BenchmarkDBEntities dbContent = new BenchmarkDBEntities();
 
             Owner ow = new Owner("TestOwner");
             int owId = ow.id;
@@ -21,14 +21,14 @@ namespace UnitTestProject
                          where user.userId == owId
                          select user;
             
-            DB_user resultUser = result.First();
+            DB_userSet resultUser = result.First();
             Assert.AreEqual(resultUser.userId, owId);
         }
 
         [TestMethod]
         public void checkOwnerInfo()
         {
-            BenchmarkSystemModelContainer dbContent = new BenchmarkSystemModelContainer();
+            BenchmarkDBEntities dbContent = new BenchmarkDBEntities();
 
             Owner ow = new Owner("testOwner");
             int owId = ow.id;
@@ -37,7 +37,7 @@ namespace UnitTestProject
                          where user.userId == owId
                          select user;
 
-            DB_user resultUser = result.First();
+            DB_userSet resultUser = result.First();
             Assert.AreEqual(resultUser.name, "testOwner");
         }
     }

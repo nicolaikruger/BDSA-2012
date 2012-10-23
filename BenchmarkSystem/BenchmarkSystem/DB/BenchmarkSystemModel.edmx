@@ -4,16 +4,16 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="BenchmarkSystemModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
-        <EntityContainer Name="BenchmarkSystemModelStoreContainer">
-          <EntitySet Name="DB_JobLogSet" EntityType="BenchmarkSystemModel.Store.DB_JobLogSet" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="DB_JobSet" EntityType="BenchmarkSystemModel.Store.DB_JobSet" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="DB_userSet" EntityType="BenchmarkSystemModel.Store.DB_userSet" store:Type="Tables" Schema="dbo" />
-          <AssociationSet Name="FK_jobLogjob" Association="BenchmarkSystemModel.Store.FK_jobLogjob">
+      <Schema Namespace="BenchmarkDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="BenchmarkDBModelStoreContainer">
+          <EntitySet Name="DB_JobLogSet" EntityType="BenchmarkDBModel.Store.DB_JobLogSet" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="DB_JobSet" EntityType="BenchmarkDBModel.Store.DB_JobSet" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="DB_userSet" EntityType="BenchmarkDBModel.Store.DB_userSet" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_jobLogjob" Association="BenchmarkDBModel.Store.FK_jobLogjob">
             <End Role="DB_JobSet" EntitySet="DB_JobSet" />
             <End Role="DB_JobLogSet" EntitySet="DB_JobLogSet" />
           </AssociationSet>
-          <AssociationSet Name="FK_jobuser" Association="BenchmarkSystemModel.Store.FK_jobuser">
+          <AssociationSet Name="FK_jobuser" Association="BenchmarkDBModel.Store.FK_jobuser">
             <End Role="DB_userSet" EntitySet="DB_userSet" />
             <End Role="DB_JobSet" EntitySet="DB_JobSet" />
           </AssociationSet>
@@ -46,8 +46,8 @@
           <Property Name="name" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <Association Name="FK_jobLogjob">
-          <End Role="DB_JobSet" Type="BenchmarkSystemModel.Store.DB_JobSet" Multiplicity="1" />
-          <End Role="DB_JobLogSet" Type="BenchmarkSystemModel.Store.DB_JobLogSet" Multiplicity="*" />
+          <End Role="DB_JobSet" Type="BenchmarkDBModel.Store.DB_JobSet" Multiplicity="1" />
+          <End Role="DB_JobLogSet" Type="BenchmarkDBModel.Store.DB_JobLogSet" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DB_JobSet">
               <PropertyRef Name="jobId" />
@@ -58,8 +58,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_jobuser">
-          <End Role="DB_userSet" Type="BenchmarkSystemModel.Store.DB_userSet" Multiplicity="1" />
-          <End Role="DB_JobSet" Type="BenchmarkSystemModel.Store.DB_JobSet" Multiplicity="*" />
+          <End Role="DB_userSet" Type="BenchmarkDBModel.Store.DB_userSet" Multiplicity="1" />
+          <End Role="DB_JobSet" Type="BenchmarkDBModel.Store.DB_JobSet" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DB_userSet">
               <PropertyRef Name="userId" />
@@ -69,73 +69,76 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="BenchmarkSystemModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" >
-        <EntityContainer Name="BenchmarkSystemModelContainer" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="DB_userSet" EntityType="BenchmarkSystemModel.DB_user" />
-          <EntitySet Name="DB_JobSet" EntityType="BenchmarkSystemModel.DB_Job" />
-          <AssociationSet Name="jobuser" Association="BenchmarkSystemModel.jobuser">
-            <End Role="job" EntitySet="DB_JobSet" />
-            <End Role="user" EntitySet="DB_userSet" />
+      <Schema Namespace="BenchmarkDBModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="BenchmarkDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DB_JobLogSet" EntityType="BenchmarkDBModel.DB_JobLogSet" />
+          <EntitySet Name="DB_JobSet" EntityType="BenchmarkDBModel.DB_JobSet" />
+          <EntitySet Name="DB_userSet" EntityType="BenchmarkDBModel.DB_userSet" />
+          <AssociationSet Name="FK_jobLogjob" Association="BenchmarkDBModel.FK_jobLogjob">
+            <End Role="DB_JobSet" EntitySet="DB_JobSet" />
+            <End Role="DB_JobLogSet" EntitySet="DB_JobLogSet" />
           </AssociationSet>
-          <EntitySet Name="DB_JobLogSet" EntityType="BenchmarkSystemModel.DB_JobLog" />
-          <AssociationSet Name="jobLogjob" Association="BenchmarkSystemModel.jobLogjob">
-            <End Role="jobLog" EntitySet="DB_JobLogSet" />
-            <End Role="job" EntitySet="DB_JobSet" />
+          <AssociationSet Name="FK_jobuser" Association="BenchmarkDBModel.FK_jobuser">
+            <End Role="DB_userSet" EntitySet="DB_userSet" />
+            <End Role="DB_JobSet" EntitySet="DB_JobSet" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="DB_user">
-          <Key>
-            <PropertyRef Name="userId" />
-          </Key>
-          <Property Type="Int32" Name="userId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="name" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="DB_Job">
-          <Key>
-            <PropertyRef Name="jobId" />
-          </Key>
-          <Property Type="Int32" Name="jobId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="status" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="userId" Relationship="BenchmarkSystemModel.jobuser" FromRole="job" ToRole="user" />
-          <Property Name="user_userId" Nullable="false" Type="Int32" />
-          <Property Type="DateTime" Name="submitDate" Nullable="false" Precision="3" />
-          <Property Type="String" Name="type" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Type="Int16" Name="numberOfDelays" Nullable="false" />
-        </EntityType>
-        <Association Name="jobuser">
-          <End Type="BenchmarkSystemModel.DB_Job" Role="job" Multiplicity="*" />
-          <End Type="BenchmarkSystemModel.DB_user" Role="user" Multiplicity="1" />
-          <ReferentialConstraint>
-            <Principal Role="user">
-              <PropertyRef Name="userId" />
-            </Principal>
-            <Dependent Role="job">
-              <PropertyRef Name="user_userId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="DB_JobLog">
+        <EntityType Name="DB_JobLogSet">
           <Key>
             <PropertyRef Name="logId" />
           </Key>
-          <Property Type="Int32" Name="logId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="status" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Type="DateTime" Name="dateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="jobId" Relationship="BenchmarkSystemModel.jobLogjob" FromRole="jobLog" ToRole="job" />
-          <Property Name="job_jobId" Nullable="false" Type="Int32" />
+          <Property Name="logId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="status" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="dateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="job_jobId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DB_JobSet" Relationship="BenchmarkDBModel.FK_jobLogjob" FromRole="DB_JobLogSet" ToRole="DB_JobSet" />
         </EntityType>
-        <Association Name="jobLogjob">
-          <End Type="BenchmarkSystemModel.DB_JobLog" Role="jobLog" Multiplicity="*" />
-          <End Type="BenchmarkSystemModel.DB_Job" Role="job" Multiplicity="1" />
+        <EntityType Name="DB_JobSet">
+          <Key>
+            <PropertyRef Name="jobId" />
+          </Key>
+          <Property Name="jobId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="status" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="user_userId" Type="Int32" Nullable="false" />
+          <Property Name="submitDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="type" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="numberOfDelays" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="DB_JobLogSet" Relationship="BenchmarkDBModel.FK_jobLogjob" FromRole="DB_JobSet" ToRole="DB_JobLogSet" />
+          <NavigationProperty Name="DB_userSet" Relationship="BenchmarkDBModel.FK_jobuser" FromRole="DB_JobSet" ToRole="DB_userSet" />
+        </EntityType>
+        <EntityType Name="DB_userSet">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="DB_JobSet" Relationship="BenchmarkDBModel.FK_jobuser" FromRole="DB_userSet" ToRole="DB_JobSet" />
+        </EntityType>
+        <Association Name="FK_jobLogjob">
+          <End Role="DB_JobSet" Type="BenchmarkDBModel.DB_JobSet" Multiplicity="1" />
+          <End Role="DB_JobLogSet" Type="BenchmarkDBModel.DB_JobLogSet" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="job">
+            <Principal Role="DB_JobSet">
               <PropertyRef Name="jobId" />
             </Principal>
-            <Dependent Role="jobLog">
+            <Dependent Role="DB_JobLogSet">
               <PropertyRef Name="job_jobId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_jobuser">
+          <End Role="DB_userSet" Type="BenchmarkDBModel.DB_userSet" Multiplicity="1" />
+          <End Role="DB_JobSet" Type="BenchmarkDBModel.DB_JobSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DB_userSet">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="DB_JobSet">
+              <PropertyRef Name="user_userId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -143,58 +146,58 @@
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="BenchmarkSystemModelStoreContainer" CdmEntityContainer="BenchmarkSystemModelContainer">
-    <EntitySetMapping Name="DB_userSet">
-      <EntityTypeMapping TypeName="IsTypeOf(BenchmarkSystemModel.DB_user)">
-        <MappingFragment StoreEntitySet="DB_userSet">
-          <ScalarProperty Name="userId" ColumnName="userId" />
-          <ScalarProperty Name="name" ColumnName="name" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="DB_JobSet">
-      <EntityTypeMapping TypeName="IsTypeOf(BenchmarkSystemModel.DB_Job)">
-        <MappingFragment StoreEntitySet="DB_JobSet">
-          <ScalarProperty Name="jobId" ColumnName="jobId" />
-          <ScalarProperty Name="status" ColumnName="status" />
-          <ScalarProperty Name="user_userId" ColumnName="user_userId" />
-          <ScalarProperty Name="submitDate" ColumnName="submitDate" />
-          <ScalarProperty Name="type" ColumnName="type" />
-          <ScalarProperty Name="numberOfDelays" ColumnName="numberOfDelays" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="DB_JobLogSet">
-      <EntityTypeMapping TypeName="IsTypeOf(BenchmarkSystemModel.DB_JobLog)">
-        <MappingFragment StoreEntitySet="DB_JobLogSet">
-          <ScalarProperty Name="logId" ColumnName="logId" />
-          <ScalarProperty Name="status" ColumnName="status" />
-          <ScalarProperty Name="dateTime" ColumnName="dateTime" />
-          <ScalarProperty Name="job_jobId" ColumnName="job_jobId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-  </EntityContainerMapping>
-</Mapping></edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BenchmarkDBModelStoreContainer" CdmEntityContainer="BenchmarkDBEntities">
+          <EntitySetMapping Name="DB_JobLogSet">
+            <EntityTypeMapping TypeName="BenchmarkDBModel.DB_JobLogSet">
+              <MappingFragment StoreEntitySet="DB_JobLogSet">
+                <ScalarProperty Name="logId" ColumnName="logId" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="dateTime" ColumnName="dateTime" />
+                <ScalarProperty Name="job_jobId" ColumnName="job_jobId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DB_JobSet">
+            <EntityTypeMapping TypeName="BenchmarkDBModel.DB_JobSet">
+              <MappingFragment StoreEntitySet="DB_JobSet">
+                <ScalarProperty Name="jobId" ColumnName="jobId" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="user_userId" ColumnName="user_userId" />
+                <ScalarProperty Name="submitDate" ColumnName="submitDate" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="numberOfDelays" ColumnName="numberOfDelays" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DB_userSet">
+            <EntityTypeMapping TypeName="BenchmarkDBModel.DB_userSet">
+              <MappingFragment StoreEntitySet="DB_userSet">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
-  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
-    <edmx:Connection>
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
       </DesignerInfoPropertySet>
-    </edmx:Connection>
-    <edmx:Options>
+    </Connection>
+    <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="False" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
-    </edmx:Options>
+    </Options>
     <!-- Diagram content (shape and connector positions) -->
-    <edmx:Diagrams>
-    </edmx:Diagrams>
-  </edmx:Designer>
+    <Diagrams></Diagrams>
+  </Designer>
 </edmx:Edmx>

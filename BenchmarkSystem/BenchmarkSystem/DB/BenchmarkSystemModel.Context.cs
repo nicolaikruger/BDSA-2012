@@ -13,10 +13,10 @@ namespace BenchmarkSystem.DB
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class BenchmarkSystemModelContainer : DbContext
+    public partial class BenchmarkDBEntities : DbContext
     {
-        public BenchmarkSystemModelContainer()
-            : base("name=BenchmarkSystemModelContainer")
+        public BenchmarkDBEntities()
+            : base("name=BenchmarkDBEntities")
         {
         }
     
@@ -25,8 +25,8 @@ namespace BenchmarkSystem.DB
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<DB_user> DB_userSet { get; set; }
-        public DbSet<DB_Job> DB_JobSet { get; set; }
-        public DbSet<DB_JobLog> DB_JobLogSet { get; set; }
+        public DbSet<DB_JobLogSet> DB_JobLogSet { get; set; }
+        public DbSet<DB_JobSet> DB_JobSet { get; set; }
+        public DbSet<DB_userSet> DB_userSet { get; set; }
     }
 }
