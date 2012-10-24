@@ -87,6 +87,12 @@ namespace BenchmarkSystem
 			}
 		}
 
+        /// <summary>
+        /// Increments one of the three variables: shortRunningJobs, longRunningJobs or veryLongRunningJobs
+        /// based on the type of job that the method takes in. 
+        /// The purpose of the method is to keep a count of how many jobs of the three types there are running. 
+        /// </summary>
+        /// <param name="job"></param>
 #if DEBUG
 		public void incrementRunningJobs(Job job)
 #else 
@@ -122,6 +128,12 @@ namespace BenchmarkSystem
 				JobDone(o, newE);
 		}
 
+        /// <summary>
+        /// Decrements one of the three variables: shortRunningJobs, longRunningJobs or veryLongRunningJobs
+        /// based on the type of job that the method takes in. 
+        /// The purpose of the method is to keep a count of how many jobs of the three types there are running.
+        /// </summary>
+        /// <param name="job"></param>
 #if DEBUG
 		public void decrementRunningJobs(Job job)
 #else 
@@ -180,7 +192,11 @@ namespace BenchmarkSystem
 		}
 
 
-
+        /// <summary>
+        /// Finds and returns the job that is next in the queue to be run. 
+        /// it goes to the list of queued jobs and calls the method findJob() with the found job.
+        /// </summary>
+        /// <returns>Returns the job that is next in the queue to run</returns>
 #if DEBUG
 		public Job findNextJobToRun()
 #else
@@ -210,6 +226,14 @@ namespace BenchmarkSystem
 
 		}
 
+        /// <summary>
+        /// Checks to see if the parsed job meets the specified conditions and returns the job if it is.
+        /// Else the method calls back to findNextJobToRun() to check the next job in the queue. 
+        /// </summary>
+        /// <param name="job">The job to check</param>
+        /// <param name="runningJobs">Numbers of jobs of one of the three given types in findNextJobToRun()</param>
+        /// <param name="i">Variable to count where in the queue list the method currently are</param>
+        /// <returns>Either a found job or a call back to findNextJobToRun()</returns>
 		private Job findJob(Job job, int runningJobs, int i)
 		{
 			if (runningJobs < 20 && job.NumberOfCPU <= BenchmarkSystem.AvailableCPU)

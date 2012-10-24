@@ -16,6 +16,11 @@ namespace BenchmarkSystem
             
         }
 
+        /// <summary>
+        /// A method that simulates a user, that adds randomjobs whenever AvailabeCPU = 30
+        /// or when there is only queued a small number of jobs.
+        /// If these conditions are not met, the thread sleeps and tries again afterwards.
+        /// </summary>
         public void createRandomJob()
         {
             Random rand = new Random();
