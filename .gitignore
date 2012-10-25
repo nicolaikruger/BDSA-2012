@@ -7,6 +7,7 @@ obj
 
 #BenchmarkSystem
 *.config
+App.config
 
 #UnitTestProject
 *.config
