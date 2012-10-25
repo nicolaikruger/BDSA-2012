@@ -14,4 +14,3 @@ Product backlog:
 - Should work on all platforms(mobile, computers etc)
 - Being able to share the calendar
 - Multiple calendars per user
-- 
