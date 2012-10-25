@@ -1,0 +1,40 @@
+Sprint backlog:
+- Create event
+	Make 'create event' button (UI)
+	get eventinput from user (UI)
+	show event (UI)
+	make test
+
+- Create calendar
+	make 'new calendar' button (UI)
+	read the calendarname from the user (UI)
+
+- Get calendar from external source
+	create connection to external source(DB)
+	retrieve data from external source(DB)
+	Convert data to the eventformat
+	make test
+	
+- The system should be able to work without internet
+	Create calendarfile on local drive
+	save calendar to local calendarfile
+	read calendar from local calendarfile
+	
+- Save calendar to external source
+	convert data to external dataformat
+	save data to external source
+	make test
+	
+	
+- Remove event
+	make 'delete event' button (UI)
+	remove event from calendar
+	remove data from local and external storage
+	
+- Change viewing
+	make 'chance viewing' button (UI)
+	made viewtemplates (UI)
+	show suggested viewing templates
+	Change calendar template to userpicked template
+	make test
+	

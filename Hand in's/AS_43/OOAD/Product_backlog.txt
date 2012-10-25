@@ -1,0 +1,17 @@
+Product backlog:
+- Create Event
+- Create calendar
+- Delete Event
+- Edit an Event
+- Change viewing
+- Add external calendar
+- Remove calendar
+- Edit calendar
+- Save calendar to external source
+- Get calendar from external source
+- At some point upgrade the system to support touch
+- The system should be able to work without internet 
+- Should work on all platforms(mobile, computers etc)
+- Being able to share the calendar
+- Multiple calendars per user
+- 
