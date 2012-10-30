@@ -3,7 +3,7 @@ We have tried to 'solve' this assignment the best way possible, but since the Ca
 GRASP:
 
 Creator:
-The creator patterns says something about object creation doing runtime. We think of this being a principle more than a pattern. This meaning, that when 'using' GRASP its more important to see and check for if the classes creating objects is the correct classes for the creation of these objects. 
+The creator patterns say something about object creation doing runtime. We think of this being a principle more than a pattern. This meaning, that when 'using' GRASP its more important to see and check for if the classes creating objects is the correct classes for the creation of these objects. 
 In our system, we believe the Calendar class is a creator, since this creates and stores Events. This makes perfect sense since its the Controller and only the Controller thats uses the Event. 
 
 Information Expert:
