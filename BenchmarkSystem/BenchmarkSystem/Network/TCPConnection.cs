@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Net;
 using System.IO;
 
+
 namespace BenchmarkSystem.Network
 {
 	public class TCPConnection
@@ -13,6 +14,9 @@ namespace BenchmarkSystem.Network
 
 		int port;
 		Socket socket;
+
+		string connectToIP;
+		int connectToPort;
 
 		/// <summary>
 		/// Creates a connection on the specified port
@@ -35,7 +39,8 @@ namespace BenchmarkSystem.Network
 		/// <param name="ip">The IP to connect to</param>
 		public void connect(string ip)
 		{
-			connect(ip, 8080);
+			connectToIP = ip;
+			connectToPort = 8080;
 		}
 
 		/// <summary>
@@ -45,19 +50,17 @@ namespace BenchmarkSystem.Network
 		/// <param name="port">The port connect to</param>
 		public void connect(string ip, int port)
 		{
-			disconnect();
-
-			IPAddress endIP = IPAddress.Parse(ip);
-			socket.Connect(endIP, port);
+			connectToIP = ip;
+			connectToPort = port;
 		}
 
 		/// <summary>
 		/// Disconnect the corrent connection.
 		/// </summary>
-		public void disconnect()
+		private void disconnect()
 		{
 			if (socket.Connected)
-				socket.Disconnect(true);
+				socket.Disconnect(false);
 		}
 
 		/// <summary>
@@ -66,14 +69,22 @@ namespace BenchmarkSystem.Network
 		/// <param name="msg">The message to be sent</param>
 		public void send(string msg)
 		{
-			if (!socket.Connected)
-				throw new SocketException();
+			connect();
 
 			NetworkStream networkStream = new NetworkStream(socket);
 			StreamWriter streamWriter = new StreamWriter(networkStream);
 
 			streamWriter.Write(msg);
 			streamWriter.Flush();
+
+			disconnect();
+		}
+
+		private void connect()
+		{
+			disconnect();
+			IPAddress endIP = IPAddress.Parse(connectToIP);
+			socket.Connect(endIP, connectToPort);
 		}
 
 		/// <summary>
@@ -106,11 +117,14 @@ namespace BenchmarkSystem.Network
 		public string recieve()
 		{
 			disconnect();
+
 			IPEndPoint ipEndPoint = new IPEndPoint(IPAddress.Any, port);
 			socket.Bind(ipEndPoint);
-			socket.Listen(20);
+			socket.Listen(1);
 
-			NetworkStream networkStream = new NetworkStream(socket, true);
+			Socket incommingConnection = socket.Accept();
+
+			NetworkStream networkStream = new NetworkStream(incommingConnection, true);
 			StreamReader streamReader = new StreamReader(networkStream);
 
 			string data = streamReader.ReadToEnd();

@@ -69,6 +69,7 @@
     <Compile Include="SchedulerTest_popJob.cs" />
     <Compile Include="SchedulerTest_executeAll.cs" />
     <Compile Include="SchedulerTest_findNextJobToRun.cs" />
+    <Compile Include="TCPConnection_testAll.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BenchmarkSystem\BenchmarkSystem.csproj">
