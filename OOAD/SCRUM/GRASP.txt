@@ -1,0 +1,23 @@
+We have tried to 'solve' this assignment the best way possible, but since the Calendar system is very small, the GRASP patterns/principles is hard to 'invoke' and therefore we have focused on the description of each pattern/principle, more than 'finding' the correct answer.
+
+GRASP:
+
+Creator:
+The creator patterns say something about object creation doing runtime. We think of this being a principle more than a pattern. This meaning, that when 'using' GRASP its more important to see and check for if the classes creating objects is the correct classes for the creation of these objects. 
+In our system, we believe the Calendar class is a creator, since this creates and stores Events. This makes perfect sense since its the Controller and only the Controller thats uses the Event. 
+
+Information Expert:
+This pattern is about assigning the responsibility of information to the right class. This is a principle of logic, where one needs to answers the question "Where will it make most sense to have this information?". The answer can be found if one looks for where the information is used in the system. It would of course make most sense to place the information as close to where it used as possible. 
+We believe that we have achieved this by splitting up some information between Calendar and Event.
+  
+Low Coupling:
+Is a principle of being able to have a system, where changes in the system will have a low impact and the ability of reuse is high. We have tried to 'implement' this by making an interface in the Storing package. This will make it easier to add extra storingdevices without altering the existing system. 
+
+Controller:
+The Controller pattern is a way of identifiyng the class that is first after the UI layer. This if often a class that starts/delegates the initial methodcalls for the whole system. A system can either hold one central Controller or a lot of controllers(or called handlers) that each represents a user case. The first, with one Controller, can lead to a very big and 'bloated' class, but can give a better overview of the flow of the system. The second way, with many controllers, can lead to better/lower coupling, since everything is split between many classes.
+The Calendar class of our system represents the Controller, since this is the 'root' of the whole system.
+
+High Cohesion:
+This is a pattern like 'divide-and-conquer'. Here responsibility of classes is split up in  the 'right' way, so that a class only has responsibility for doing one thing. High cohesion also says something about where information is placed. If a system has three classes; Vehicle, Car and carWheel it only makes sense that Car knows about carWHeel, since a Vehicle can have other kinds of wheel besides carWheel. 
+We have done this for our system by placing the alarms in the Event class instead of the Calendar. It makes more sense to let an Event itself know about an alarm instead of the Calendar. 
+
