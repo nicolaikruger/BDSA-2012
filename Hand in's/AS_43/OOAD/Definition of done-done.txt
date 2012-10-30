@@ -1,0 +1,11 @@
+Definition of done:
+Source code is implemented
+Tested in usual context
+Tested enough to make use of the class
+
+
+Definition of done-done:
+Is marked as done
+Well documented
+Tested in every thinkable context
+Able to take every input and act according to the input
