@@ -105,6 +105,7 @@ namespace BenchmarkSystem.Network
 		/// <returns>The incomming message as a string</returns>
 		public string recieve()
 		{
+			disconnect();
 			IPEndPoint ipEndPoint = new IPEndPoint(IPAddress.Any, port);
 			socket.Bind(ipEndPoint);
 			socket.Listen(20);
