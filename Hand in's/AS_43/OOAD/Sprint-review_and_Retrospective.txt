@@ -1,0 +1,6 @@
+Sprint Review:
+For this meeting the Team, SCRUM Master, Product Owner and a customer representative was present. The Team presented the list of done items and the two items(show suggested viewing templates and make test, under the "Change viewing"), that didn't meet the "Definition of Done" and therefore needs to be put back on the product backlog. 
+
+Sprint Retrospective:
+At this meeting the workprocess was reviewed. We used a whiteboard, to list things that worked and not worked and one thing were mentioned many times. This item was the involvement of the Product Owner. The teams seems to be frustrated over the PO's constant interference. This is left to SCRUM Master to deal with.
+A positive item, was the teams satisfaction with the length of the sprint cycle. They got almost every item done in time and without stress. 
