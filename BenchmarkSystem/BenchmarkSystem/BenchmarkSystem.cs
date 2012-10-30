@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Jobs;
 using BenchmarkSystem.DB;
+using BenchmarkSystem.Network;
 using System.Threading;
 
 namespace BenchmarkSystem
@@ -15,9 +16,10 @@ namespace BenchmarkSystem
 		public Logger.Logger logger = null;
 #else
         private Scheduler scheduler = new Scheduler();
+		private Logger.Logger logger = null;
 #endif
-
-        public event EventHandler<JobEventArgs> JobSubmitted, JobCancelled, JobRunning, JobTerminated, JobFailed;
+		public TCPConnection conn = new TCPConnection(8080);
+		public event EventHandler<JobEventArgs> JobSubmitted, JobCancelled, JobRunning, JobTerminated, JobFailed;
         public static readonly int NumberOfCPU = 30;
 		private static int availableCPU = NumberOfCPU;
 		public static int AvailableCPU

@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientSimulation.cs" />
+    <Compile Include="Computer\Computer.cs" />
     <Compile Include="DB\BenchmarkSystemModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -81,6 +82,7 @@
     <Compile Include="Jobs\Owner.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="BenchmarkSystem.cs" />
+    <Compile Include="Network\TCPConnection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scheduler.cs" />
   </ItemGroup>
