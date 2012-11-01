@@ -11,6 +11,8 @@ namespace BenchmarkSystem.GUI
 {
 	public partial class Form1 : Form
 	{
+
+        public Form2 form2;
 		public Form1()
 		{
 			InitializeComponent();	
@@ -18,7 +20,8 @@ namespace BenchmarkSystem.GUI
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-
+           form2 = new Form2();
+           form2.ShowDialog(this);
 		}
 
 		private void Form1_Load(object sender, EventArgs e)

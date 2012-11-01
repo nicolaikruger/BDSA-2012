@@ -61,10 +61,15 @@ namespace BenchmarkSystem
         //TODO : Should be made as a singleton
 		public BenchmarkSystem()
 		{
-			subscribe(scheduler);
-			logger = new Logger.Logger(this);
-			Application.Run(new Form1());
+			//subscribe(scheduler);
+			//logger = new Logger.Logger(this);
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Form1 form1 = new Form1();
+			Application.Run(form1);
+            form1.form2.JobSubmittedClick += submit;
 		}
+
 
 		/// <summary>
 		/// Submist a job to the system
