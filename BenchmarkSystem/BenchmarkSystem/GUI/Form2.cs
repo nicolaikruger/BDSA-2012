@@ -18,26 +18,33 @@ namespace BenchmarkSystem.GUI
 			InitializeComponent();
 		}
 
-<<<<<<< HEAD
 		private void Form2_Load(object sender, EventArgs e)
 		{
 
 		}
-=======
+
         private void cancel_Click(object sender, EventArgs e)
         {
-            this.Dispose();
+            this.Hide();
+			clearFields();
         }
 
         private void okay_Click(object sender, EventArgs e)
         {
             Owner owner = new Owner(owner_text.Text);
-            int cpu = int.Parse(cpu_combobox.SelectedText);
+            int cpu = int.Parse(cpu_combobox.SelectedItem.ToString());
             int runtime = int.Parse(runtime_text.Text);
             Job job = new Job(cpu, runtime, owner, f => "Hello");
             JobSubmittedClick(job);
-            this.Dispose();
+            this.Hide();
+			clearFields();
         }
->>>>>>> Created form2 and added functionality to it
+
+		private void clearFields()
+		{
+			owner_text.Text = string.Empty;
+			cpu_combobox.SelectedItem = 0;
+			runtime_text.Text = string.Empty;
+		}
 	}
 }

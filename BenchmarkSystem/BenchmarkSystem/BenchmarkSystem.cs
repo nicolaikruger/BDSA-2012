@@ -45,14 +45,6 @@ namespace BenchmarkSystem
             ClientSimulation cs = new ClientSimulation(bs);
             Thread clientThread = new Thread(() => cs.createRandomJob());
 			
-            Owner ow = new Owner("Nicolai");
-
-			Job j = new Job(1, 2, ow, s => "Hello world");
-			Console.WriteLine("Job: " + j.id);
-
-			bs.submit(j);
-			bs.executeAll();
-            
 			Console.Out.WriteLine("done");
 
 			Console.ReadLine();
@@ -61,13 +53,13 @@ namespace BenchmarkSystem
         //TODO : Should be made as a singleton
 		public BenchmarkSystem()
 		{
-			//subscribe(scheduler);
-			//logger = new Logger.Logger(this);
+			subscribe(scheduler);
+			logger = new Logger.Logger(this);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Form1 form1 = new Form1();
+			form1.form2.JobSubmittedClick += submit;
 			Application.Run(form1);
-            form1.form2.JobSubmittedClick += submit;
 		}
 
 
