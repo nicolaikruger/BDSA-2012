@@ -27,5 +27,10 @@ namespace BenchmarkSystem.GUI
 			this.dB_JobSetTableAdapter.Fill(this.benchmarkDBDataSet1.DB_JobSet);
 
 		}
+
+		private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+		{
+
+		}
 	}
 }
