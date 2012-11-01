@@ -50,8 +50,8 @@
 			// 
 			// button1
 			// 
-			this.button1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-			this.button1.Location = new System.Drawing.Point(13, 218);
+			this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.button1.Location = new System.Drawing.Point(12, 265);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(75, 23);
 			this.button1.TabIndex = 1;
@@ -61,18 +61,22 @@
 			// 
 			// button2
 			// 
-			this.button2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-			this.button2.Location = new System.Drawing.Point(94, 218);
+			this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.button2.Location = new System.Drawing.Point(93, 265);
 			this.button2.Name = "button2";
 			this.button2.Size = new System.Drawing.Size(75, 23);
 			this.button2.TabIndex = 2;
 			this.button2.Text = "Refresh";
 			this.button2.UseVisualStyleBackColor = true;
+			this.button2.Click += new System.EventHandler(this.button2_Click);
 			// 
 			// dataGridView1
 			// 
 			this.dataGridView1.AllowUserToAddRows = false;
 			this.dataGridView1.AllowUserToDeleteRows = false;
+			this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.dataGridView1.AutoGenerateColumns = false;
 			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -86,7 +90,7 @@
 			this.dataGridView1.MultiSelect = false;
 			this.dataGridView1.Name = "dataGridView1";
 			this.dataGridView1.ReadOnly = true;
-			this.dataGridView1.Size = new System.Drawing.Size(544, 150);
+			this.dataGridView1.Size = new System.Drawing.Size(557, 246);
 			this.dataGridView1.TabIndex = 3;
 			this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
 			// 
@@ -149,12 +153,13 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(573, 325);
+			this.ClientSize = new System.Drawing.Size(584, 300);
 			this.Controls.Add(this.dataGridView1);
 			this.Controls.Add(this.button2);
 			this.Controls.Add(this.button1);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-			this.MinimumSize = new System.Drawing.Size(350, 220);
+			this.MaximumSize = new System.Drawing.Size(600, 5000);
+			this.MinimumSize = new System.Drawing.Size(600, 270);
 			this.Name = "Form1";
 			this.Text = "Form1";
 			this.Load += new System.EventHandler(this.Form1_Load);
