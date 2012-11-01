@@ -35,7 +35,7 @@ namespace BenchmarkSystem.GUI
 
 		private void button2_Click(object sender, EventArgs e)
 		{
-
+			this.dB_JobSetTableAdapter.Update(this.benchmarkDBDataSet1.DB_JobSet);
 		}
 	}
 }
