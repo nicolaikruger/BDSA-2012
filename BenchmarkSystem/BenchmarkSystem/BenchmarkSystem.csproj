@@ -39,8 +39,10 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,6 +50,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BenchmarkDBDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BenchmarkDBDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="BenchmarkDBDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BenchmarkDBDataSet1.xsd</DependentUpon>
+    </Compile>
     <Compile Include="ClientSimulation.cs" />
     <Compile Include="Computer\Computer.cs" />
     <Compile Include="DB\BenchmarkSystemModel.Context.cs">
@@ -75,6 +87,18 @@
     <Compile Include="DB\DB_userSet.cs">
       <DependentUpon>BenchmarkSystemModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Form2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Form2.Designer.cs">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Jobs\Job.cs" />
     <Compile Include="Jobs\JobEventArgs.cs" />
     <Compile Include="Jobs\JobState.cs" />
@@ -84,6 +108,16 @@
     <Compile Include="BenchmarkSystem.cs" />
     <Compile Include="Network\TCPConnection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Scheduler.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -94,6 +128,28 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>BenchmarkSystemModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="BenchmarkDBDataSet.xsc">
+      <DependentUpon>BenchmarkDBDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="BenchmarkDBDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BenchmarkDBDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="BenchmarkDBDataSet.xss">
+      <DependentUpon>BenchmarkDBDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="BenchmarkDBDataSet1.xsc">
+      <DependentUpon>BenchmarkDBDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="BenchmarkDBDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BenchmarkDBDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="BenchmarkDBDataSet1.xss">
+      <DependentUpon>BenchmarkDBDataSet1.xsd</DependentUpon>
+    </None>
     <None Include="DB\BenchmarkSystemModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>BenchmarkSystemModel.edmx</DependentUpon>
@@ -108,12 +164,29 @@
       <LastGenOutput>BenchmarkSystemModel.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Jobs.Job.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="DB\BenchmarkSystemModel.edmx.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="GUI\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Form2.resx">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

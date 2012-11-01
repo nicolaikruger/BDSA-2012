@@ -6,6 +6,8 @@ using Jobs;
 using BenchmarkSystem.DB;
 using BenchmarkSystem.Network;
 using System.Threading;
+using BenchmarkSystem.GUI;
+using System.Windows.Forms;
 
 namespace BenchmarkSystem
 {
@@ -61,6 +63,7 @@ namespace BenchmarkSystem
 		{
 			subscribe(scheduler);
 			logger = new Logger.Logger(this);
+			Application.Run(new Form1());
 		}
 
 		/// <summary>
