@@ -1,0 +1,6 @@
+Sequence Diagram
+This type of diagram show us the ordering of time of messages between two or more objects which give an advantage when the ordering of communication is important. On the other hand these types of diagrams can ofte and fast become very big(consume a lot of horizontal space) when many objects a added. 
+
+Communicaton Diagram
+Is a diagram which is a lot more space economical than the previous, since new objects can be added without screwing up the whole diagram and can often be added more than one place. The biggest disadvantage with the diagram is the ability to see where to start and end. The sequence of communication can be tricky to realize and the level of details are often limited, compared to sequence diagrams.
+
